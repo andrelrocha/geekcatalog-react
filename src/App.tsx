@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { ApiManager } from './utils/API-axios/ApiManager';
 import logo from './logo.svg';
 import './App.css';
 
+const checkServerAvailability = async () => {
+  try {
+      await ApiManager.get("/infra/ping");
+      console.log("Server is online.");
+  } catch (error) {
+      console.error("Server is not available.");
+      alert("Error: Server is not available.");
+  }
+}
+
 function App() {
+  useEffect(() => {
+    checkServerAvailability();
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
