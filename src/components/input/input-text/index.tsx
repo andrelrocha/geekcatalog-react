@@ -1,51 +1,63 @@
 import React from 'react';
 import { ComponentProps } from 'react';
 import { Control, Controller, FieldValues, Path } from 'react-hook-form';
-import { TextFieldProps, CircularProgress, Box, IconButton } from '@mui/material';
+import { CircularProgress, Box, IconButton } from '@mui/material';
 import { Check, Close, Info } from '@mui/icons-material';
 import Input from '../input';
+import { colors } from '../../../utils/colors';
 
 type InputTextProps<T extends FieldValues> = {
   control: Control<T>;
   formatInternalValue?: (str: string) => string;
   formatVisibleValue?: (str: string) => string;
   icon?: React.ReactNode;
-  inputProps?: TextFieldProps;
+  iconClick?: () => void;
+  staticIcon?: boolean;
+  inputProps?: ComponentProps<typeof Input>['inputProps'];
   isLoading?: boolean;
   name: Path<T>;
   placeholder?: string;
   rules?: ComponentProps<typeof Controller<T>>['rules'];
   visibleValidation?: boolean;
-  staticIcon?: boolean;
   bColorFocus?: string;
   editable?: boolean;
   numberOfLines?: number;
   maxLength?: number;
-} & ComponentProps<typeof Input>;
+};
+
+const styles = {
+  boxInput: {
+    position: 'relative',
+    display: 'flex',
+    alignItems: 'center',
+    width: '25rem',
+    margin: '0.5rem 0',
+  },
+};
 
 const InputText = <T extends FieldValues>({
   control,
   formatInternalValue,
   formatVisibleValue,
   icon,
+  iconClick,
+  staticIcon,
   inputProps,
   isLoading,
   name,
   placeholder,
   rules,
   visibleValidation,
-  staticIcon,
-  editable,
+  editable = true,
   numberOfLines = 1,
   maxLength,
-  ...props
 }: InputTextProps<T>) => {
   const _formatVisibleValue = formatVisibleValue || ((str: string) => str);
   const _formatInternalValue = formatInternalValue || ((str: string) => str);
   const _visibleValidation = visibleValidation ?? true;
 
   const handleInputIcon = (isValid: boolean, isInvalid: boolean) => {
-    if (icon && !isValid && !isInvalid) {
+    if ((icon && !isValid && !isInvalid) || staticIcon) {
       return (
         <IconButton>
           {icon}
@@ -82,23 +94,23 @@ const InputText = <T extends FieldValues>({
         const inputFieldHeight = numberOfLines > 1 ? numberOfLines * 50 : 50;
 
         return (
-          <Box sx={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+          <Box sx={styles.boxInput}>
             <Input
-              isInvalid={isInvalid}
-              {...props}
-              style={{ height: inputFieldHeight }}
+              inputFieldHeight={inputFieldHeight}
               inputProps={{
                 ...inputProps,
-                placeholder: placeholder,
+                placeholder,
                 value: externalValue,
-                onChange: (newValue: string) => onChange(_formatInternalValue(newValue)),
+                onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
+                  onChange(_formatInternalValue(event.target.value));
+                },
                 disabled: !editable,
-                multiline: numberOfLines > 1,
-                style: { paddingTop: numberOfLines > 1 ? 10 : 0 },
-                inputProps: { maxLength: maxLength },
+                maxLength,
               }}
+              isInvalid={isInvalid}
+              inputIcon={handleInputIcon(isValid, isInvalid)}
+              iconClick={iconClick}
             />
-            {handleInputIcon(isValid, isInvalid)}
             {isLoading && (
               <Box sx={{ position: 'absolute', right: '10px' }}>
                 <CircularProgress size={20} color="inherit" />

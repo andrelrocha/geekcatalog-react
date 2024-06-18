@@ -33,7 +33,7 @@ const ButtonLoading = (props: ButtonProps) => {
 
   const textStyles = {
     color: colors.whiteSmoke,
-    fontSize: '1.2rem', 
+    fontSize: '1rem', 
   };
 
   return (

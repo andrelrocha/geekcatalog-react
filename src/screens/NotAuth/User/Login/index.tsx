@@ -1,10 +1,12 @@
 
 import React, { useContext } from 'react';
 import { Control, useForm } from 'react-hook-form';
-import { Box } from '@mui/material';
-import { Heading, InputPassword, ButtonLoading, InputEmail } from '../../../../components';
+import { Box, TextField } from '@mui/material';
+import { colors } from '../../../../utils/colors';
+import { Heading, InputPassword, ButtonLoading, InputEmail, InputText } from '../../../../components';
 import { UserLogin } from '../../../../types/user/userLoginDTO';
 import AuthContext from '../../../../context/auth.context';
+import Input from '../../../../components/input/input';
 
 const DEFAULT_FORM_VALUES = { email: "", password: "" };
 
@@ -35,35 +37,34 @@ const Login = () => {
 
     return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <Heading style={{ marginBottom: 20, marginTop: 10 }}>Sign In</Heading>
+        <Heading style={{ marginBottom: 5, marginTop: 10 }}>Sign In</Heading>
 
-      <Box style={{ marginBottom: 20 }}> 
-        <InputEmail
-          control={control}
-          name="email"
-          placeholder="Enter your e-mail"
-          rules={{ required: true }}
-        />
+            
+            <InputEmail
+                control={control}
+                name="email"
+                placeholder="Enter your e-mail"
+                rules={{ required: true }}
+            />
         
-        <InputPassword
-          control={control}
-          name="password"
-          placeholder="Enter your password"
-          rules={{ required: true }}
-          visibleValidation={false}
-        />
-      </Box>
+            <InputPassword
+                control={control}
+                name="password"
+                placeholder="Enter your password"
+                rules={{ required: true }}
+                visibleValidation={false}
+            />
 
-      <ButtonLoading
-        disabled={!isValid}
-        isLoading={isLoggingIn}
-        onClick={handleSubmit(async () => 
-            handleLogin(control)
-        )}
-        mt={20}
-      >
-        Login
-      </ButtonLoading>
+        <ButtonLoading
+            disabled={!isValid}
+            isLoading={isLoggingIn}
+            onClick={handleSubmit(async () => 
+                handleLogin(control)
+            )}
+            mt={20}
+            backgroundColor={colors.buttonBlue}
+        >Login
+        </ButtonLoading>
 
     {/*
       <div style={{ display: 'flex', flexDirection: 'row', gap: 20, marginTop: 20 }}>

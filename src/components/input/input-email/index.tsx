@@ -18,7 +18,6 @@ const InputEmail = <T extends FieldValues>(props: ComponentProps<typeof InputTex
       {...props}
       icon={icon}
       rules={{ ...props.rules, validate }}
-      inputProps={{ type: 'email' }}
     />
   );
 };

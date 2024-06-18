@@ -21,21 +21,17 @@ const InputPassword = <T extends FieldValues>(props: ComponentProps<typeof Input
   const togglePassword = () => setShowPassword(!showPassword)
 
   return (
-    <InputText
+    <InputText<T>
       {...props}
       inputProps={{
         ...props.inputProps,
         type: showPassword ? 'text' : 'password',
       }}
-      icon={0}
       rules={{ validate, ...props.rules }}
-    >
-      <InputAdornment position="end">
-            <IconButton onClick={togglePassword} edge="end">
-            {showPassword ? <VisibilityOff /> : <Visibility />}
-            </IconButton>
-      </InputAdornment>
-    </InputText>
+      staticIcon={true}
+      icon={showPassword ? <VisibilityOff /> : <Visibility />}
+      iconClick={togglePassword}
+    />
   );
 }
 

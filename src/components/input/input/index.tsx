@@ -1,48 +1,78 @@
 import React from 'react';
-import { TextField, Box } from '@mui/material';
+import { InputAdornment, OutlinedInput, OutlinedInputProps } from '@mui/material';
+import { styled } from '@mui/system';
 import { colors } from '../../../utils/colors';
 
-const Input = ({
-  height = 50,
-  borderColor = colors.gray,
-  borderWidth = 1,
-  borderRadius = 5,
-  paddingHorizontal = 10,
-  marginBottom = 10,
-  inputProps = {},
+interface InputProps extends OutlinedInputProps {
+  isInvalid?: boolean;
+  inputFieldHeight?: string | number;
+  inputProps?: React.InputHTMLAttributes<HTMLInputElement> & {
+    maxLength?: number;
+  };
+  onChange?: (value: any) => void;
+  inputIcon?: React.ReactNode;
+  iconClick?: () => void;
+}
+
+const StyledInput = styled((props: OutlinedInputProps) => (
+  <OutlinedInput {...props} />
+))(({ theme }) => ({
+  width: '100%',
+  color: colors.black,
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: colors.gray,
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: colors.buttonBlue,
+    },
+    '& .MuiInputBase-input': {
+      textAlign: 'center',
+      paddingTop: (props: InputProps) => (props.inputProps?.multiple ? 10 : 0),
+    },
+  },
+}));
+
+const Input: React.FC<InputProps> = ({
+  isInvalid,
+  inputFieldHeight,
+  inputProps,
+  onChange,
+  inputIcon,
+  iconClick,
   ...props
 }) => {
-  const styles = {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    height: `${height}px`,
-    borderColor: borderColor,
-    borderWidth: borderWidth,
-    borderRadius: `${borderRadius}px`,
-    padding: `0 ${paddingHorizontal}px`,
-    marginBottom: `${marginBottom}px`,
-    boxSizing: 'border-box',
+
+  const handleIconClick = () => {
+    if (iconClick) {
+      iconClick();
+    }
   };
 
   return (
-    <Box sx={styles}>
-      <TextField
-        {...props}
-        variant="outlined"
-        fullWidth
-        InputProps={{
-          ...inputProps,
-          style: {
-            padding: 0,
-            margin: 0,
-            fontSize: 16,
-            borderRadius: `${borderRadius}px`,
-          },
-        }}
-      />
-    </Box>
+    <StyledInput
+      {...props}
+      fullWidth
+      error={isInvalid}
+      sx={{ height: inputFieldHeight }}
+      inputProps={{
+        ...inputProps,
+        placeholder: inputProps?.placeholder,
+        value: inputProps?.value,
+        onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
+          inputProps?.onChange?.(event);
+          onChange?.(event.target.value);
+        },
+        disabled: inputProps?.disabled,
+        maxLength: inputProps?.maxLength,
+        multiline: inputProps?.multiple,
+      }}
+      endAdornment={inputIcon && (
+        <InputAdornment position="end" onClick={handleIconClick}>
+          {inputIcon}
+        </InputAdornment>
+      )}
+    />
   );
 };
 
