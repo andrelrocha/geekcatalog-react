@@ -1,11 +1,12 @@
 
 import React, { useContext } from 'react';
 import { Control, useForm } from 'react-hook-form';
+import { Box } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import { colors } from '../../../../utils/colors';
 import { Heading, InputPassword, ButtonLoading, InputEmail } from '../../../../components';
 import { UserLogin } from '../../../../types/user/userLoginDTO';
 import AuthContext from '../../../../context/auth.context';
-import { Box } from '@mui/material';
 
 const backgroundImage = require('../../../../assets/images/background-footer.jpg');
 
@@ -18,6 +19,7 @@ type FormData = {
 
 const Login = () => {
     const { isLoading: isLoggingIn, login } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const {
         control,
@@ -34,7 +36,7 @@ const Login = () => {
             password
         };
 
-        await login(userData, () => console.log('Logged in'));
+        await login(userData, () => navigate('/homeauth'));
     };
 
     const styles = {

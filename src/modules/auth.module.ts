@@ -3,14 +3,13 @@ import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 const TOKEN_KEY = 'auth_token';
 
-export const getToken = (): string | undefined => {
-  return cookies.get(TOKEN_KEY);
+export const getToken = () => cookies.get(TOKEN_KEY);
+
+export const setToken = (token: string) => {
+  return new Promise<void>((resolve) => {
+    cookies.set(TOKEN_KEY, token, { path: '/' });
+    resolve();
+  });
 };
 
-export const setToken = (token: string): void => {
-  cookies.set(TOKEN_KEY, token, { path: '/', maxAge: 604800, secure: true, sameSite: 'strict' });
-};
-
-export const removeToken = (): void => {
-  cookies.remove(TOKEN_KEY, { path: '/' });
-};
+export const removeToken = () => cookies.remove(TOKEN_KEY, { path: '/' });
