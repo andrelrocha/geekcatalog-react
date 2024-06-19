@@ -3,7 +3,7 @@ import { Box, Button } from '@mui/material';
 import { colors } from '../../../utils/colors';
 import { Heading } from '../../../components';
 
-const gamerImg = require('../../assets/images/gamer.png');
+const gamerImg = require('../../../assets/images/gamer.png');
 
 const styles = {
     container: {

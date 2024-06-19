@@ -1,6 +1,5 @@
 import React from "react";
 import { Avatar, Box, Typography } from "@mui/material";
-import { fontSize, lineHeight, padding, textAlign, width } from "@mui/system";
 import { Heading } from "../../../components";
 
 const myPhoto = require('../../../assets/images/profile.jpg');
