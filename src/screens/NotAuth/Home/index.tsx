@@ -1,8 +1,7 @@
 import React from 'react';
 import { Box, Button } from '@mui/material';
-import { colors } from '../../utils/colors';
-import { Heading } from '../../components';
-import { height, margin, width } from '@mui/system';
+import { colors } from '../../../utils/colors';
+import { Heading } from '../../../components';
 
 const gamerImg = require('../../assets/images/gamer.png');
 

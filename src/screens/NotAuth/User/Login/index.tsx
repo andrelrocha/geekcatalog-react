@@ -5,7 +5,6 @@ import { colors } from '../../../../utils/colors';
 import { Heading, InputPassword, ButtonLoading, InputEmail } from '../../../../components';
 import { UserLogin } from '../../../../types/user/userLoginDTO';
 import AuthContext from '../../../../context/auth.context';
-import { height, padding } from '@mui/system';
 import { Box } from '@mui/material';
 
 const backgroundImage = require('../../../../assets/images/background-footer.jpg');
@@ -72,7 +71,7 @@ const Login = () => {
     </a> );
 
     return (
-      <div style={styles.container}>
+      <Box sx={styles.container}>
         <Box sx={[styles.responsiveSignInContainer, styles.signInContainer]}>
             <Heading style={{ marginBottom: 2 }}>Sign In</Heading>
                 <InputEmail
@@ -127,7 +126,7 @@ const Login = () => {
           </div>
         */}
         </Box>
-      </div>
+      </Box>
   );
 };
 
