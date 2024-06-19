@@ -39,6 +39,7 @@ const styles = {
   labelText: {
    alignSelf: 'flex-start', 
    marginBottom: '0.5rem',
+   fontFamily: 'Poppins',
   },
   bottomElement: {
     alignSelf: 'flex-start',

@@ -19,6 +19,7 @@ const StyledInput = styled((props: OutlinedInputProps) => (
 ))(({ theme }) => ({
   width: '100%',
   color: colors.black,
+  fontFamily: 'Poppins',
   '& .MuiOutlinedInput-root': {
     '& fieldset': {
       borderColor: colors.gray,

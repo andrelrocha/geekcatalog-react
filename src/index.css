@@ -37,7 +37,7 @@ code {
   --buttonHover: rgba(255, 255, 255, 0.7);
   --box-shadow: rgba(0, 0, 0, 0.2);
 
-  --mainFont: 'Poppins', sans-serif;
+  --mainFont: 'Poppins';
   --mainFontWeight: 400;
   --titleFontWeight: 600;
 }

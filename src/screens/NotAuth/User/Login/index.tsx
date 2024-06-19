@@ -1,7 +1,6 @@
 
 import React, { useContext } from 'react';
 import { Control, useForm } from 'react-hook-form';
-import { Box, TextField, Typography } from '@mui/material';
 import { colors } from '../../../../utils/colors';
 import { Heading, InputPassword, ButtonLoading, InputEmail } from '../../../../components';
 import { UserLogin } from '../../../../types/user/userLoginDTO';
@@ -28,6 +27,7 @@ const Login = () => {
   
     const handleLogin = async (control: Control<FormData>) => {
         const  { email, password } = control._formValues;
+        console.log('email', email);
         const userData: UserLogin = {
             login: email,
             password
@@ -58,14 +58,14 @@ const Login = () => {
   };
 
   const forgotPasswordAnchor = (
-    <a href="/" style={{ color: colors.buttonBlue, textDecoration: 'none' }}>
+    <a href="/">
       Forgot Password?
     </a> );
 
     return (
       <div style={styles.container}>
         <div style={styles.signInContainer}>
-            <Heading style={{ marginBottom: 5 }}>Sign In</Heading>
+            <Heading style={{ marginBottom: 2 }}>Sign In</Heading>
                 <InputEmail
                     control={control}
                     name="email"
@@ -83,7 +83,6 @@ const Login = () => {
                     label='Password'
                     downComponent={forgotPasswordAnchor}
                 />
-
 
                 <ButtonLoading
                     disabled={!isValid}
