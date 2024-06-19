@@ -1,9 +1,9 @@
 import React from 'react';
 import { ComponentProps } from 'react';
 import { Control, Controller, FieldValues, Path } from 'react-hook-form';
-import { CircularProgress, Box, IconButton } from '@mui/material';
+import { CircularProgress, Box, IconButton, Typography } from '@mui/material';
 import { Check, Close, Info } from '@mui/icons-material';
-import Input from '../input';
+import Input from '../input-outlined-base';
 import { colors } from '../../../utils/colors';
 
 type InputTextProps<T extends FieldValues> = {
@@ -23,16 +23,30 @@ type InputTextProps<T extends FieldValues> = {
   editable?: boolean;
   numberOfLines?: number;
   maxLength?: number;
+  label?: string;
+  downComponent?: React.ReactNode;
 };
 
 const styles = {
   boxInput: {
     position: 'relative',
     display: 'flex',
+    flexDirection: 'column',
     alignItems: 'center',
     width: '25rem',
     margin: '0.5rem 0',
   },
+  labelText: {
+   alignSelf: 'flex-start', 
+   marginBottom: '0.5rem',
+  },
+  bottomElement: {
+    alignSelf: 'flex-start',
+    marginBottom: '0.5rem',
+    marginTop: '0.5rem',
+    color: colors.buttonBlue, 
+    textDecoration: 'none'
+  }
 };
 
 const InputText = <T extends FieldValues>({
@@ -51,6 +65,8 @@ const InputText = <T extends FieldValues>({
   editable = true,
   numberOfLines = 1,
   maxLength,
+  label,
+  downComponent,
 }: InputTextProps<T>) => {
   const _formatVisibleValue = formatVisibleValue || ((str: string) => str);
   const _formatInternalValue = formatInternalValue || ((str: string) => str);
@@ -95,6 +111,7 @@ const InputText = <T extends FieldValues>({
 
         return (
           <Box sx={styles.boxInput}>
+            {label && <Typography style={styles.labelText}>{label}</Typography>}
             <Input
               inputFieldHeight={inputFieldHeight}
               inputProps={{
@@ -110,7 +127,8 @@ const InputText = <T extends FieldValues>({
               isInvalid={isInvalid}
               inputIcon={handleInputIcon(isValid, isInvalid)}
               iconClick={iconClick}
-            />
+              />
+            {downComponent && React.cloneElement(downComponent as React.ReactElement, { style: styles.bottomElement })}
             {isLoading && (
               <Box sx={{ position: 'absolute', right: '10px' }}>
                 <CircularProgress size={20} color="inherit" />

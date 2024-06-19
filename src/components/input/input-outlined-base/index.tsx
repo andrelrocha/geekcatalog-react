@@ -1,5 +1,5 @@
 import React from 'react';
-import { InputAdornment, OutlinedInput, OutlinedInputProps } from '@mui/material';
+import { InputAdornment, OutlinedInput as MUIOutlinedInput, OutlinedInputProps } from '@mui/material';
 import { styled } from '@mui/system';
 import { colors } from '../../../utils/colors';
 
@@ -15,7 +15,7 @@ interface InputProps extends OutlinedInputProps {
 }
 
 const StyledInput = styled((props: OutlinedInputProps) => (
-  <OutlinedInput {...props} />
+  <MUIOutlinedInput {...props} />
 ))(({ theme }) => ({
   width: '100%',
   color: colors.black,
@@ -33,7 +33,7 @@ const StyledInput = styled((props: OutlinedInputProps) => (
   },
 }));
 
-const Input: React.FC<InputProps> = ({
+const OutlinedInput: React.FC<InputProps> = ({
   isInvalid,
   inputFieldHeight,
   inputProps,
@@ -76,4 +76,4 @@ const Input: React.FC<InputProps> = ({
   );
 };
 
-export default Input;
+export default OutlinedInput;
