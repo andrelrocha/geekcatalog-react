@@ -5,6 +5,8 @@ import { colors } from '../../../../utils/colors';
 import { Heading, InputPassword, ButtonLoading, InputEmail } from '../../../../components';
 import { UserLogin } from '../../../../types/user/userLoginDTO';
 import AuthContext from '../../../../context/auth.context';
+import { height, padding } from '@mui/system';
+import { Box } from '@mui/material';
 
 const backgroundImage = require('../../../../assets/images/background-footer.jpg');
 
@@ -27,7 +29,7 @@ const Login = () => {
   
     const handleLogin = async (control: Control<FormData>) => {
         const  { email, password } = control._formValues;
-        console.log('email', email);
+
         const userData: UserLogin = {
             login: email,
             password
@@ -38,11 +40,11 @@ const Login = () => {
 
     const styles = {
       container: {
-        display: 'flex' as const,
-        justifyContent: 'center' as const,
-        alignItems: 'center' as const,
-        height: '100vh',
-        backgroundImage: `url(${backgroundImage})`,
+          display: 'flex' as const,
+          justifyContent: 'center' as const,
+          alignItems: 'center' as const,
+          height: '100vh',
+          backgroundImage: `url(${backgroundImage})`,
       },
       signInContainer: {
           display: 'flex' as const,
@@ -51,9 +53,16 @@ const Login = () => {
           border: '1px solid',
           borderColor: colors.gray,
           borderRadius: 10,
-          padding: '3rem 1rem',
-          width: '30rem',
+          padding: '3rem 2rem',
+          width: '25rem',
           backgroundColor: colors.whiteSmoke,
+      },
+      responsiveSignInContainer: {
+          '@media (max-width: 650px)': {
+              width: '100%',
+              height: '100%',
+              marginTop: '3rem',
+          },
       },
   };
 
@@ -64,7 +73,7 @@ const Login = () => {
 
     return (
       <div style={styles.container}>
-        <div style={styles.signInContainer}>
+        <Box sx={[styles.responsiveSignInContainer, styles.signInContainer]}>
             <Heading style={{ marginBottom: 2 }}>Sign In</Heading>
                 <InputEmail
                     control={control}
@@ -117,7 +126,7 @@ const Login = () => {
             </ButtonTouchable>
           </div>
         */}
-        </div>
+        </Box>
       </div>
   );
 };

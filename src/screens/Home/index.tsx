@@ -15,10 +15,6 @@ const styles = {
         justifyContent: 'center' as const,
         alignItems: 'center' as const,
         height: '100vh',
-        /*backgroundImage: `url(${gamerImg})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'right',
-        backgroundRepeat: 'no-repeat', */
     },
     headingContainer: {
         display: 'flex',
@@ -46,14 +42,23 @@ const styles = {
             width: '90%', 
         },
     },
+    responsiveBackground: {
+        '@media (min-width: 1200px)': {
+            width: '100%',
+            backgroundImage: `url(${gamerImg})`,
+            backgroundSize: '20%',
+            backgroundPosition: 'right',
+            backgroundRepeat: 'no-repeat', 
+        },
+    },
 }
 
 export default function Home() {
     return (
-        <Box sx={styles.container}>
+        <Box sx={[styles.responsiveBackground, styles.container]}>
             <Box sx={styles.headingContainer}>
                 <Heading textAlign='flex-start'>Welcome!</Heading>
-                <Heading textAlign='flex-start' fs={20}> What about change your gaming experience better managing your backlog? <br/> Join our app!</Heading>
+                <Heading textAlign='flex-start' fs={18}> What about change your gaming experience better managing your backlog? <br/> Join our app!</Heading>
             </Box>
 
 

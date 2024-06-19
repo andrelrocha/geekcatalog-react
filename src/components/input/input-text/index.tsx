@@ -33,7 +33,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    width: '25rem',
+    width: '100%',
     margin: '0.5rem 0',
   },
   labelText: {
