@@ -9,6 +9,8 @@ type CustomButtonProps = {
   textColor?: string;
   hoverBackgroundColor?: string;
   hoverTextColor?: string;
+  p?: number;
+  fs?: number;
   mt?: number;
   w?: number;
   h?: number;
@@ -24,11 +26,12 @@ const ButtonNavigation = (props: ButtonProps) => {
   const baseStyles = {
       backgroundColor: props.backgroundColor || undefined,
       color: props.textColor || colors.whiteSmoke,
-      padding: `1 rem`,
+      padding: `${props.p || 1}rem`,
       marginTop: `${props.mt || 0}rem`,
       width: props.w ? `${props.w}rem` : '100%',
       height: `${props.h || 3}rem`,
       borderRadius: `${props.br || 2}rem`,
+      borderColor: colors.gray,
       justifyContent: 'center',
       alignItems: 'center',
       transition: 'background-color 0.3s, color 0.3s, box-shadow 0.3s',
@@ -47,7 +50,7 @@ const ButtonNavigation = (props: ButtonProps) => {
 
   const textStyles = {
     color: props.textColor || colors.whiteSmoke,
-    fontSize: '1rem',
+    fontSize: `${props.fs || 16}px`,
   };
 
   const handleClick = () => {
