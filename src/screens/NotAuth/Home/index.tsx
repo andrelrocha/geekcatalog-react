@@ -54,7 +54,6 @@ export default function Home() {
                 <Heading textAlign='flex-start' fs={18}> What about change your gaming experience better managing your backlog? <br/> Join our app!</Heading>
             </Box>
 
-
             <Box sx={[styles.responsiveButton, styles.buttonContainer]}>    
                 <ButtonNavigation to='/login' backgroundColor={colors.black} textColor={colors.whiteSmoke}>Sign In</ButtonNavigation>
                 <ButtonNavigation to='/signup' backgroundColor={colors.greenStrong} >Sign Up</ButtonNavigation>

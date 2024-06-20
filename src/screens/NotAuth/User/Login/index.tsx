@@ -81,7 +81,7 @@ const Login = () => {
     return (
       <Box sx={styles.container}>
         <Box sx={[styles.responsiveSignInContainer, styles.signInContainer]}>
-            <Heading style={{ marginBottom: 2 }}>Sign In</Heading>
+            <Heading mt={1}>Sign In</Heading>
                 <InputEmail
                     control={control}
                     name="email"
