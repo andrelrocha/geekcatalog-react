@@ -3,6 +3,7 @@ import { Box } from '@mui/material';
 import { colors } from '../../utils/colors';
 import { ButtonNavigation, Heading } from '../../components';
 import { ReactComponent as LogoImg } from '../../assets/images/logo.svg';
+import { useNavigate } from 'react-router-dom';
 
 
 const styles = {
@@ -27,6 +28,7 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     gap: '0.5rem',
+    cursor: 'pointer',
   },
   logoTitle: {
     fontFamily: 'var(--mainFont)',
@@ -40,11 +42,15 @@ const styles = {
   },
 };
 
+//FAZER ESQUEMA DE ESCONDER OS BUTTONCONTAINER E APARECER O ICONE COM A MODAL COM MAXSIZE 700PX
+
 const Header = () => {
+  const navigate = useNavigate();
+
   return (
     <header>
       <Box sx={styles.toolbar}>
-        <Box sx={styles.logoContainer}>
+        <Box sx={styles.logoContainer} onClick={() => navigate('/')}>
           <LogoImg width="40" height="40" />
           <Heading fs={22} style={styles.logoTitle}>Geek Catalog</Heading>
         </Box>

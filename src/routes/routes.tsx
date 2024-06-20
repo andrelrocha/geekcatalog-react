@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
-import { Header } from "../components"
+import { Footer, Header } from "../components"
 import Home from "../screens/NotAuth/Home"
 import Login from "../screens/NotAuth/User/Login"
 import About from "../screens/NotAuth/About"
@@ -30,6 +30,7 @@ export default function AppRouter() {
                     <Route path="/homeauth" element={<HomeAuth />} />
                 ) : null}
             </Routes>
+            <Footer />
         </Router>
     )
 }

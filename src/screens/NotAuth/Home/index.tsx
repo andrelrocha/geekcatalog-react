@@ -30,6 +30,12 @@ const styles = {
         gap: 1,
         width: '24rem' as const,
     },
+    responsiveHeading: {
+        '@media (max-width: 430px)': {
+            fontSize: '1.5rem',
+            textAlign: 'center',
+        },
+    },
     responsiveButton: {
         '@media (max-width: 510px)': {
             width: '90%', 
@@ -49,7 +55,7 @@ const styles = {
 export default function Home() {
     return (
         <Box sx={[styles.responsiveBackground, styles.container]}>
-            <Box sx={styles.headingContainer}>
+            <Box sx={[styles.responsiveHeading, styles.headingContainer]}>
                 <Heading textAlign='flex-start'>Welcome!</Heading>
                 <Heading textAlign='flex-start' fs={18}> What about change your gaming experience better managing your backlog? <br/> Join our app!</Heading>
             </Box>
