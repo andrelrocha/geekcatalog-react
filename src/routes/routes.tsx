@@ -12,8 +12,7 @@ export default function AppRouter() {
     const { authenticated } = authState;
 
     useEffect(() => {
-        console.log("Authenticated:", authenticated);
-        console.log("AuthState:", authState);
+
     }, [authenticated]);    
 
     return (

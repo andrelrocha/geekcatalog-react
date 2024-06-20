@@ -23,10 +23,10 @@ const ButtonLoading = (props: ButtonProps) => {
     color: props.textColor || colors.whiteSmoke,
     padding: `${props.ph || 1}rem`,
     marginTop: `${props.mt || 0}rem`,
-    width: `${props.w || 12}rem`,
+    width: props.w ? `${props.w}rem` : '100%',
     height: `${props.h || 3}rem`,
     opacity: props.isLoading || props.disabled ? 0.5 : 1,
-    borderRadius: `${props.br || 1.2}rem`,
+    borderRadius: `${props.br || 2}rem`,
     justifyContent: 'center',
     alignItems: 'center',
   };

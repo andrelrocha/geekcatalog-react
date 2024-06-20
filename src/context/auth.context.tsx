@@ -98,8 +98,7 @@ export const AuthProvider = (props: AuthProviderProps) => {
 
             navigate();
         } catch (error: any) {
-            console.error("Error while logging in:", error);
-            alert('Error: An error occurred while logging into your account.');
+            alert('Error: ' + error.response.data || 'An error occurred while logging in.');
             await removeToken();
         } finally {
             setIsLoading(false);

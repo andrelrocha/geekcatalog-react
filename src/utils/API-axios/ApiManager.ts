@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const url = "https://closely-glad-whale.ngrok-free.app";
+//const url = "https://closely-glad-whale.ngrok-free.app";
+const url = "http://localhost:8080"
 
 export const ApiManager = axios.create({
     baseURL: url,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Button } from '@mui/material';
 import { colors } from '../../../utils/colors';
-import { Heading } from '../../../components';
+import { ButtonNavigation, Heading } from '../../../components';
 
 const gamerImg = require('../../../assets/images/gamer.png');
 
@@ -30,12 +30,6 @@ const styles = {
         gap: 1,
         width: '24rem' as const,
     },
-    button: {
-        width:  '100%' as const,
-        height: '3rem' as const,
-        borderRadius: 12,
-        transition: 'width 0.3s ease-in-out',
-    },
     responsiveButton: {
         '@media (max-width: 510px)': {
             width: '90%', 
@@ -46,7 +40,7 @@ const styles = {
             width: '100%',
             backgroundImage: `url(${gamerImg})`,
             backgroundSize: '20%',
-            backgroundPosition: 'right',
+            backgroundPosition: 'calc(100% - 2rem) 95%',
             backgroundRepeat: 'no-repeat', 
         },
     },
@@ -61,10 +55,10 @@ export default function Home() {
             </Box>
 
 
-            <Box sx={[styles.responsiveButton, styles.buttonContainer]}>
-                <Button variant="contained" sx={[styles.button, { backgroundColor: colors.black, color: colors.whiteSmoke }]}>Sign Up</Button>
-                <Button variant="contained" sx={[styles.button, { backgroundColor: colors.darkPurple, color: colors.whiteSmoke }]}>Sign In</Button>
-                <Button variant="contained" sx={[styles.button, { backgroundColor: colors.sage, color: colors.black }]}>About</Button>
+            <Box sx={[styles.responsiveButton, styles.buttonContainer]}>    
+                <ButtonNavigation to='/login' backgroundColor={colors.black} textColor={colors.whiteSmoke}>Sign In</ButtonNavigation>
+                <ButtonNavigation to='/signup' backgroundColor={colors.greenStrong} >Sign Up</ButtonNavigation>
+                <ButtonNavigation to='/about' backgroundColor={colors.sage} textColor={colors.black}>About</ButtonNavigation>
             </Box>
         </Box>
     );

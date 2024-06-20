@@ -4,7 +4,7 @@ import { Control, useForm } from 'react-hook-form';
 import { Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { colors } from '../../../../utils/colors';
-import { Heading, InputPassword, ButtonLoading, InputEmail } from '../../../../components';
+import { Heading, InputPassword, ButtonLoading, InputEmail, ButtonNavigation } from '../../../../components';
 import { UserLogin } from '../../../../types/user/userLoginDTO';
 import AuthContext from '../../../../context/auth.context';
 
@@ -15,6 +15,40 @@ const DEFAULT_FORM_VALUES = { email: "", password: "" };
 type FormData = {
   email: string;
   password: string;
+};
+
+const styles = {
+  container: {
+      display: 'flex' as const,
+      justifyContent: 'center' as const,
+      alignItems: 'center' as const,
+      height: '100vh',
+      backgroundImage: `url(${backgroundImage})`,
+  },
+  signInContainer: {
+      display: 'flex' as const,
+      flexDirection: 'column' as const,
+      alignItems: 'center' as const,
+      border: '1px solid',
+      borderColor: colors.gray,
+      borderRadius: 10,
+      padding: '3rem 2rem',
+      width: '25rem',
+      backgroundColor: colors.whiteSmoke,
+  },
+  buttonContainer: {
+      display: 'flex',
+      flexDirection: 'column', 
+      width: '90%',
+      gap: '1rem',
+  },
+  responsiveSignInContainer: {
+      '@media (max-width: 650px)': {
+          width: '100%',
+          height: '100%',
+          marginTop: '3rem',
+      },
+  },
 };
 
 const Login = () => {
@@ -38,34 +72,6 @@ const Login = () => {
 
         await login(userData, () => navigate('/homeauth'));
     };
-
-    const styles = {
-      container: {
-          display: 'flex' as const,
-          justifyContent: 'center' as const,
-          alignItems: 'center' as const,
-          height: '100vh',
-          backgroundImage: `url(${backgroundImage})`,
-      },
-      signInContainer: {
-          display: 'flex' as const,
-          flexDirection: 'column' as const,
-          alignItems: 'center' as const,
-          border: '1px solid',
-          borderColor: colors.gray,
-          borderRadius: 10,
-          padding: '3rem 2rem',
-          width: '25rem',
-          backgroundColor: colors.whiteSmoke,
-      },
-      responsiveSignInContainer: {
-          '@media (max-width: 650px)': {
-              width: '100%',
-              height: '100%',
-              marginTop: '3rem',
-          },
-      },
-  };
 
   const forgotPasswordAnchor = (
     <a href="/">
@@ -94,39 +100,19 @@ const Login = () => {
                     downComponent={forgotPasswordAnchor}
                 />
 
-                <ButtonLoading
-                    disabled={!isValid}
-                    isLoading={isLoggingIn}
-                    onClick={handleSubmit(async () => 
-                        handleLogin(control)
-                    )}
-                    backgroundColor={colors.buttonBlue}
-                >Login
-                </ButtonLoading>
+                <Box sx={styles.buttonContainer}>
+                    <ButtonLoading
+                        disabled={!isValid}
+                        isLoading={isLoggingIn}
+                        onClick={handleSubmit(async () => 
+                          handleLogin(control)
+                        )}
+                        backgroundColor={colors.buttonBlue}
+                        >Login
+                    </ButtonLoading>
 
-        {/*
-          <div style={{ display: 'flex', flexDirection: 'row', gap: 20, marginTop: 20 }}>
-            <ButtonTouchable
-              onPress={() => navigation.navigate('NotAuthStack', { screen: 'SignUp' })}
-              mt={4}
-              w={150}
-              h={40}
-              backgroundColor={colors.greenStrong}
-            >
-              Sign Up
-            </ButtonTouchable>
-
-            <ButtonTouchable
-              onPress={() => navigation.navigate('NotAuthStack', { screen: 'ForgotPassword' })}
-              mt={4}
-              w={150}
-              h={40}
-              backgroundColor={colors.redStrong}
-            >
-              Forgot Password 
-            </ButtonTouchable>
-          </div>
-        */}
+                    <ButtonNavigation to='/signup' backgroundColor={colors.greenStrong}>Sign Up</ButtonNavigation>
+                </Box>
         </Box>
       </Box>
   );
