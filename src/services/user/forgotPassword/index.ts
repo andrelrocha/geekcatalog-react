@@ -14,12 +14,11 @@ export async function forgotPassword(props: HandleForgotPasswordProps) {
                 return response.data;
             })
             .catch((error) => {
-                throw new Error('Error sending email during password recovery: ' + error.response.data);
+                throw new Error(error.response.data);
             });
 
         return response;
     } catch (error) {
-        console.error(error);
-        throw new Error('Error sending email: ' + error);
+        throw error;
     }
 }

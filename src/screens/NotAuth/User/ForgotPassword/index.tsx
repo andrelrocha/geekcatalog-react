@@ -62,11 +62,20 @@ const styles = {
         flexDirection: 'column',
         alignItems: 'center',
         margin: 'auto',
+
+        '@media (max-width: 900px)': {
+            width: '70%',
+        },
     },
     button: {
         marginTop: '1rem',
-        width: '40%'
+        width: '40%',
+
+        '@media (max-width: 900px)': {
+            width: '60%',
+        },
     }
 }
+
 
 export default ForgotPassword;

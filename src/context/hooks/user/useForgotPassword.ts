@@ -17,7 +17,7 @@ export default function useForgotPassword() {
             alert('Success! Email sent successfully, check your inbox for the token to reset your password');
             navigate();
         } catch (error: any) {
-            alert('Error sending email for password recovery: ' + error.response.data || 'An error occurred while sending the email.');
+            alert('Error sending email for password recovery: ' + error);
         } finally {
             setIsEmailSending(false);
         }

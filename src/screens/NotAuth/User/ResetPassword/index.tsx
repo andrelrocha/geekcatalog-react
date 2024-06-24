@@ -127,6 +127,9 @@ const styles = {
         width: '100%',
         maxWidth: 400,
         marginBottom: 20,
+        '@media (max-width: 425px)': {
+            width: '90%',
+        }
     },
     buttonContainer: {
         width: '50%',
