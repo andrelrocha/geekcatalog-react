@@ -8,6 +8,8 @@ import { useEffect } from "react";
 
 import HomeAuth from "../screens/Auth/Home";
 import NotFoundPage from "../screens/NotFound"
+import ForgotPassword from "../screens/NotAuth/User/ForgotPassword"
+import ResetPassword from "../screens/NotAuth/User/ResetPassword"
 
 export default function AppRouter() {
     const { authState } = useAuth();
@@ -21,11 +23,11 @@ export default function AppRouter() {
         <Router>
             <Header />
             <Routes>
-                {["/", "/home"].map((path, index) => 
-                    <Route path={path} element={<Home/>} key={index} />
-                )}
+                {["/", "/home"].map((path, index) => <Route path={path} element={<Home/>} key={index} />)}
                 <Route path="/login" element={<Login />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/forgotpassword" element={<ForgotPassword />} />
+                <Route path="/resetpassword" element={<ResetPassword />} />
                 
                 {authenticated ? (
                     <Route path="/homeauth" element={<HomeAuth />} />

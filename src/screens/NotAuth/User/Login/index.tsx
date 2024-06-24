@@ -1,7 +1,7 @@
 
 import React, { useContext } from 'react';
 import { Control, useForm } from 'react-hook-form';
-import { Box } from '@mui/material';
+import { Box, Link } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { colors } from '../../../../utils/colors';
 import { Heading, InputPassword, ButtonLoading, InputEmail, ButtonNavigation } from '../../../../components';
@@ -81,10 +81,11 @@ const Login = () => {
         await login(userData, () => navigate('/homeauth'));
     };
 
-  const forgotPasswordAnchor = (
-    <a href="/">
-      Forgot Password?
-    </a> );
+    const forgotPasswordAnchor = (
+        <Link underline='none' onClick={() => navigate('/forgotpassword')} sx={{cursor: 'pointer'}}>
+            Forgot password?
+        </Link>
+    );
 
     return (
       <Box sx={styles.container}>
