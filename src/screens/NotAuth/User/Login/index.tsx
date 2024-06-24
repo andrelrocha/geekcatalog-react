@@ -8,7 +8,7 @@ import { Heading, InputPassword, ButtonLoading, InputEmail, ButtonNavigation } f
 import { UserLogin } from '../../../../types/user/userLoginDTO';
 import AuthContext from '../../../../context/auth.context';
 
-const backgroundImage = require('../../../../assets/images/background-footer.jpg');
+const backgroundImage = require('../../../../assets/images/login-bg.jpg');
 
 const DEFAULT_FORM_VALUES = { email: "", password: "" };
 
@@ -24,6 +24,7 @@ const styles = {
       alignItems: 'center' as const,
       height: '100vh',
       backgroundImage: `url(${backgroundImage})`,
+      backgroundSize: 'cover',
   },
   signInContainer: {
       display: 'flex' as const,
@@ -46,9 +47,16 @@ const styles = {
       '@media (max-width: 650px)': {
           width: '100%',
           height: '100%',
-          marginTop: '3rem',
+          padding: '0rem 2rem',
+          borderRadius: 0,
       },
   },
+  responsiveHeading: {
+      marginTop: '0rem',
+      '@media (max-width: 650px)': {
+          marginTop: '2rem'
+      },
+  }
 };
 
 const Login = () => {
@@ -81,7 +89,7 @@ const Login = () => {
     return (
       <Box sx={styles.container}>
         <Box sx={[styles.responsiveSignInContainer, styles.signInContainer]}>
-            <Heading mt={1}>Sign In</Heading>
+            <Heading style={styles.responsiveHeading}>Sign In</Heading>
                 <InputEmail
                     control={control}
                     name="email"

@@ -1,5 +1,6 @@
-import React from 'react';
-import { Box } from '@mui/material';
+import React, { useState } from 'react';
+import { Box, Dialog, DialogContent, DialogActions, IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import TableRowsIcon from '@mui/icons-material/TableRows';
 import { useNavigate } from 'react-router-dom';
 import { colors } from '../../utils/colors';
@@ -36,6 +37,14 @@ const styles = {
       fontWeight: 'var(--titleFontWeight)',
       color: colors.whiteSmoke,
   },
+  modalContent: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: '1rem',
+      height: '100%'
+  },
   buttonsContainer: {
       display: 'flex',
       gap: '0.5rem',
@@ -57,9 +66,9 @@ const styles = {
     },
 };
 
-
 const Header = () => {
   const navigate = useNavigate();
+  const [modalNavIsOpen, setModalNavIsOpen] = useState(false);
 
   return (
     <header>
@@ -77,8 +86,32 @@ const Header = () => {
           <ButtonNavigation to='/login' variant="outlined" p={0.1} br={0.5} fs={12} h={2.2} backgroundColor={colors.whiteSmoke} textColor={colors.black} >Sign In</ButtonNavigation>
           <ButtonNavigation to='/signup' p={0.1} br={0.5} fs={12} h={2.2} backgroundColor={colors.greenStrong} textColor={colors.whiteSmoke}>Sign Up</ButtonNavigation>
         </Box>
-        <TableRowsIcon sx={styles.tableRowIcon} onClick={() => console.log('Pressed')} />
+        <TableRowsIcon sx={styles.tableRowIcon} onClick={() => setModalNavIsOpen(!modalNavIsOpen)} />
       </Box>
+
+      <Dialog fullScreen open={modalNavIsOpen} onClose={() => setModalNavIsOpen(false)}>
+        <DialogActions>
+          <IconButton edge="start" color="inherit" onClick={() => setModalNavIsOpen(false)} aria-label="close">
+            <CloseIcon />
+          </IconButton>
+        </DialogActions>
+        <DialogContent>
+          <Box sx={styles.modalContent}>
+            <ButtonNavigation to='/home' variant="outlined" p={0.5} br={0.5} fs={18} h={3.5} textColor={colors.black} 
+                handleStates={() => setModalNavIsOpen(false)}>
+                  Home</ButtonNavigation>
+            <ButtonNavigation to='/about' variant='outlined' p={0.5} br={0.5} fs={18} h={3.5} textColor={colors.black}
+                handleStates={() => setModalNavIsOpen(false)}>
+                  About</ButtonNavigation>
+            <ButtonNavigation to='/login' variant="outlined" p={0.5} br={0.5} fs={18} h={3.5} textColor={colors.black}
+                handleStates={() => setModalNavIsOpen(false)}>
+                  Sign In</ButtonNavigation>
+            <ButtonNavigation to='/signup' p={0.5} br={0.5} fs={18} h={3.5} backgroundColor={colors.greenStrong} textColor={colors.whiteSmoke}
+              handleStates={() => setModalNavIsOpen(false)}>
+                Sign Up</ButtonNavigation>
+          </Box>
+        </DialogContent>
+      </Dialog>
     </header>
   );
 };

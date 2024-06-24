@@ -5,6 +5,7 @@ import { colors } from '../../../utils/colors';
 
 type CustomButtonProps = {
   to: string;
+  handleStates?: () => void;
   backgroundColor?: string;
   textColor?: string;
   hoverBackgroundColor?: string;
@@ -55,6 +56,9 @@ const ButtonNavigation = (props: ButtonProps) => {
 
   const handleClick = () => {
     if (!props.disabled) {
+      if (props.handleStates) {
+        props.handleStates();
+      }
       navigate(props.to);
     }
   };
