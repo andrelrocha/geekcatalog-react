@@ -7,6 +7,7 @@ import { useAuth } from "../context/hooks";
 import { useEffect } from "react";
 
 import HomeAuth from "../screens/Auth/Home";
+import NotFoundPage from "../screens/NotFound"
 
 export default function AppRouter() {
     const { authState } = useAuth();
@@ -29,6 +30,8 @@ export default function AppRouter() {
                 {authenticated ? (
                     <Route path="/homeauth" element={<HomeAuth />} />
                 ) : null}
+
+                <Route path="*" element={<NotFoundPage />} />
             </Routes>
             <Footer />
         </Router>
