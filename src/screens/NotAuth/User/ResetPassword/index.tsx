@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Control, useForm } from 'react-hook-form';
-import { Box, Paper, Popover, Typography } from '@mui/material';
-import { Unstable_Popup as Popup } from '@mui/base';
+import { useForm } from 'react-hook-form'; 
+import { Box } from '@mui/material';
 import { ButtonLoading, Heading, InputEmail, InputText, InputPassword, InputPasswordValidation } from '../../../../components';
 import useResetPassword from '../../../../context/hooks/user/useResetPassword';
 import { isSamePassword } from '../../../../libs/validators/password';
 import { colors } from '../../../../utils/colors';
+import TextWarning from '../../../../components/text-warning';
 
 type FormData = {
     email: string;
@@ -19,7 +19,7 @@ const DEFAULT_FORM_VALUES = { email: "", tokenMail: "", password: "", passwordCo
 
 const ResetPassword = () => {
     const navigation = useNavigate();
-    const { isLoading, handleResetPassword, popupAnchor, setPopupAnchor } = useResetPassword();
+    const { isLoading, handleResetPassword } = useResetPassword();
     const [isPasswordClicked, setIsPasswordClicked] = useState(false);
 
     const {
@@ -58,13 +58,18 @@ const ResetPassword = () => {
                     placeholder="Enter your token"
                     rules={{ required: true }}
                 />
+
+                {isPasswordClicked && (
+                    <TextWarning style={styles.passwordWarning}>Password must have at least 8 characters, one uppercase letter, one lowercase letter, and one number.</TextWarning>
+                )}
                 <InputPasswordValidation 
                     control={control} 
                     name="password" 
                     placeholder="Password" 
                     rules={{ required: true}} 
                     inputProps={{
-                        onFocus: () => setIsPasswordClicked(!isPasswordClicked),
+                        onFocus: () => setIsPasswordClicked(true),
+                        onBlur: () => setIsPasswordClicked(false),
                     }}
                 />
 
@@ -74,7 +79,7 @@ const ResetPassword = () => {
                     placeholder="Confirm Password"
                     rules={{ required: true }}
                     inputProps={{
-                        onFocus: () => setIsPasswordClicked(!isPasswordClicked),
+                        onFocus: () => setIsPasswordClicked(false),
                     }}
                 />
 
@@ -90,28 +95,6 @@ const ResetPassword = () => {
                     </ButtonLoading>
                 </Box>
             </Box> 
-
-            {/*
-            <Popover
-                open={!!popupAnchor}
-                anchorEl={popupAnchor}
-                onClose={() => setPopupAnchor(null)}
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'center',
-                }}
-                transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'center',
-                }}
-            >
-                <Paper sx={{ p: 2 }}>
-                    <Typography variant="body1">
-                        Password must have at least 8 characters, one uppercase letter, one lowercase letter, and one number.
-                    </Typography>
-                </Paper>
-            </Popover>
-            */}
         </Box>
     );
 }
@@ -135,6 +118,19 @@ const styles = {
         width: '50%',
         margin: 'auto',
     },
+    passwordWarning: {
+        width: '80%',
+        margin: 'auto',
+        height: 3,
+        padding: 5,
+        borderRadius: 4,
+        backgroundColor: colors.redWeakDarker,
+        '@media (max-width: 425px)': {
+            width: 'auto',
+            height: 'auto',
+            padding: 1
+        }
+    }
 };
 
 export default ResetPassword;

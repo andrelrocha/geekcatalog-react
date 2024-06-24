@@ -10,7 +10,6 @@ interface ResetPassword {
 export default function useResetPassword() {
     const [isLoading, setIsLoading] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
-    const [popupAnchor, setPopupAnchor] = useState<HTMLDivElement | null>(null);
 
 
     const handleResetPassword = async (credentials: ResetPassword, navigate: () => void) => {
@@ -31,7 +30,5 @@ export default function useResetPassword() {
         isLoading,
         isSuccess,
         handleResetPassword,
-        popupAnchor,
-        setPopupAnchor,
     };
 }
