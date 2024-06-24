@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Box, Dialog, DialogContent, DialogActions, IconButton } from '@mui/material';
+import { Box } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import TableRowsIcon from '@mui/icons-material/TableRows';
 import { useNavigate } from 'react-router-dom';
 import { colors } from '../../utils/colors';
-import { ButtonNavigation, Heading } from '../../components';
+import { ButtonNavigation, Heading, Modal } from '../../components';
 import { ReactComponent as LogoImg } from '../../assets/images/icon.svg';
 
 
@@ -89,29 +89,32 @@ const Header = () => {
         <TableRowsIcon sx={styles.tableRowIcon} onClick={() => setModalNavIsOpen(!modalNavIsOpen)} />
       </Box>
 
-      <Dialog fullScreen open={modalNavIsOpen} onClose={() => setModalNavIsOpen(false)}>
-        <DialogActions>
-          <IconButton edge="start" color="inherit" onClick={() => setModalNavIsOpen(false)} aria-label="close">
-            <CloseIcon />
-          </IconButton>
-        </DialogActions>
-        <DialogContent>
+      <Modal
+        open={modalNavIsOpen}
+        onClose={() => setModalNavIsOpen(false)}
+        fullScreen
+        icon={<CloseIcon />}
+        content={
           <Box sx={styles.modalContent}>
             <ButtonNavigation to='/home' variant="outlined" p={0.5} br={0.5} fs={18} h={3.5} textColor={colors.black} 
                 handleStates={() => setModalNavIsOpen(false)}>
-                  Home</ButtonNavigation>
+                  Home
+            </ButtonNavigation>
             <ButtonNavigation to='/about' variant='outlined' p={0.5} br={0.5} fs={18} h={3.5} textColor={colors.black}
                 handleStates={() => setModalNavIsOpen(false)}>
-                  About</ButtonNavigation>
+                  About
+            </ButtonNavigation>
             <ButtonNavigation to='/login' variant="outlined" p={0.5} br={0.5} fs={18} h={3.5} textColor={colors.black}
                 handleStates={() => setModalNavIsOpen(false)}>
-                  Sign In</ButtonNavigation>
+                  Sign In
+            </ButtonNavigation>
             <ButtonNavigation to='/signup' p={0.5} br={0.5} fs={18} h={3.5} backgroundColor={colors.greenStrong} textColor={colors.whiteSmoke}
               handleStates={() => setModalNavIsOpen(false)}>
-                Sign Up</ButtonNavigation>
+                Sign Up
+            </ButtonNavigation>
           </Box>
-        </DialogContent>
-      </Dialog>
+        }
+      />
     </header>
   );
 };

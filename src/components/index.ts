@@ -6,5 +6,6 @@ import Heading from "./heading";
 import InputEmail from "./input/input-email";
 import InputText from "./input/input-text";
 import InputPassword from "./input/input-password";
+import Modal from "./modal";
 
-export { ButtonLoading, ButtonNavigation, Footer, Header, Heading, InputEmail, InputText, InputPassword}
+export { ButtonLoading, ButtonNavigation, Footer, Header, Heading, InputEmail, InputText, InputPassword, Modal}
