@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import { colors } from '../../utils/colors';
-import { fontSize } from '@mui/system';
 
 const footerBackground = require('../../assets/images/background-footer.jpg');
 
@@ -35,7 +34,8 @@ const Footer = () => {
         },
         responsiveText: {
             '@media (max-width: 430px)': {
-                fontSize: '0.6rem',
+                fontSize: '0.7rem',
+                width: '85%'
             },
         },
     };

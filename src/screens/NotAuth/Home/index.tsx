@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Button } from '@mui/material';
+import { Box } from '@mui/material';
 import { colors } from '../../../utils/colors';
 import { ButtonNavigation, Heading } from '../../../components';
 
@@ -49,6 +49,10 @@ const styles = {
             backgroundPosition: 'calc(100% - 2rem) 95%',
             backgroundRepeat: 'no-repeat', 
         },
+        '@media (max-width: 600px)': {
+            height: '100%',
+            padding: '5rem 0rem',
+        }
     },
 }
 
