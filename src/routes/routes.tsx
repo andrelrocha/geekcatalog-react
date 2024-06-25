@@ -5,7 +5,7 @@ import Login from "../screens/NotAuth/User/Login"
 import About from "../screens/NotAuth/About"
 import { useAuth } from "../context/hooks";
 import { useEffect } from "react";
-
+import Create from "../screens/NotAuth/User/Create"
 import HomeAuth from "../screens/Auth/Home";
 import NotFoundPage from "../screens/NotFound"
 import ForgotPassword from "../screens/NotAuth/User/ForgotPassword"
@@ -25,6 +25,7 @@ export default function AppRouter() {
             <Routes>
                 {["/", "/home"].map((path, index) => <Route path={path} element={<Home/>} key={index} />)}
                 <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Create />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/forgotpassword" element={<ForgotPassword />} />
                 <Route path="/resetpassword" element={<ResetPassword />} />

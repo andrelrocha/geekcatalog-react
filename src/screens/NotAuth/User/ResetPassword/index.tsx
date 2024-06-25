@@ -2,11 +2,10 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form'; 
 import { Box } from '@mui/material';
-import { ButtonLoading, Heading, InputEmail, InputText, InputPassword, InputPasswordValidation } from '../../../../components';
+import { ButtonLoading, Heading, InputEmail, InputText, InputPassword, InputPasswordValidation, TextWarning } from '../../../../components';
 import useResetPassword from '../../../../context/hooks/user/useResetPassword';
 import { isSamePassword } from '../../../../libs/validators/password';
 import { colors } from '../../../../utils/colors';
-import TextWarning from '../../../../components/text-warning';
 
 type FormData = {
     email: string;
