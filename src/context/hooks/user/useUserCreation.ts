@@ -3,21 +3,25 @@ import { useState } from "react";
 export default function useUserCreation() {
 
   const [uri, setUri] = useState("");
-  const [modalPicVisible, setModalPicVisible] = useState(false);
   const [isPasswordClicked, setIsPasswordClicked] = useState(false);
   const [showTerms, setShowTerms] = useState(false)
   const [isAccepted, setIsAccepted] = useState('')
 
-  const handleProfilePicture = async (mode: "gallery" | "camera" | undefined) => {
-    //const uri = await handleImageSelection({ mode: mode });
-    //setUri(uri as string);
-  }
+  const handleProfilePicture = async (file: File) => {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      if (reader.result) {
+        const blobData = new Blob([reader.result as ArrayBuffer], { type: file.type });
+        const blobUrl = URL.createObjectURL(blobData);
+        setUri(blobUrl);
+      }
+    };
+    reader.readAsArrayBuffer(file);
+  };
 
   return {
     uri,
     setUri,
-    modalPicVisible,
-    setModalPicVisible,
     isPasswordClicked,
     setIsPasswordClicked,
     handleProfilePicture,

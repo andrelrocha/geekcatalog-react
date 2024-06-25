@@ -14,6 +14,7 @@ export const colors = {
   lightBlue: '#E4D9FF',
   whiteSmoke: "#F4F4F4",
   buttonBlue: '#007bff',
+  buttonBlueDark: '#0062cc',
   darkPurple: '#301934',
   lightGray: '#D3D3D3',
   gray: '#808080',

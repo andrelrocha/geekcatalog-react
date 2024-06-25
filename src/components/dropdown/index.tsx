@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 import { Control, Controller } from 'react-hook-form';
-import InfoIcon from '@mui/icons-material/Info';
 import { Box } from '@mui/material';
 import { DropdownData } from '../../types/utils/dropDownDTO';
 import { colors } from '../../utils/colors';
@@ -43,7 +42,7 @@ const DropdownSelection: React.FC<DropdownProps> = ({
         name={name}
         control={control}
         render={({ field: { onChange, value } }) => (
-          <Box sx={{ position: 'relative', marginBottom: mb || 10, marginTop: mt || 0 }}>
+          <Box sx={{ position: 'relative', marginBottom: mb || 0, marginTop: mt || 0 }}>
             <Select
               {...props}
               options={dropdownOptions}
@@ -76,10 +75,6 @@ const DropdownSelection: React.FC<DropdownProps> = ({
                 }),
               }}
             />
-            {/*
-            <div style={{ position: 'absolute', top: '50%', right: 10, transform: 'translateY(-50%)' }}>
-              {icon || <InfoIcon color="disabled"/>}
-            </div> */}
           </Box>
         )}
       />

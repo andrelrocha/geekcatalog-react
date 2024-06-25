@@ -1,6 +1,7 @@
 import ButtonLoading from "./button/button-loading";
 import ButtonNavigation from "./button/button-navigation";
 import DropdownSelection from "./dropdown";
+import FileUploadButton from "./button/file-uploading";
 import Footer from "./footer";
 import Header from "./header";
 import Heading from "./heading";
@@ -11,4 +12,4 @@ import InputPasswordValidation from "./input/input-password-validation";
 import Modal from "./modal";
 import TextWarning from "./text-warning";
 
-export { ButtonLoading, ButtonNavigation, DropdownSelection, Footer, Header, Heading, InputEmail, InputText, InputPassword, InputPasswordValidation, Modal, TextWarning }
+export { ButtonLoading, ButtonNavigation, DropdownSelection, FileUploadButton, Footer, Header, Heading, InputEmail, InputText, InputPassword, InputPasswordValidation, Modal, TextWarning }

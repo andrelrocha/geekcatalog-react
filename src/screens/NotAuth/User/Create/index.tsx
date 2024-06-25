@@ -4,7 +4,7 @@ import { Box, Typography } from "@mui/material";
 import { colors } from "../../../../utils/colors";
 import { loremIpsum } from "../../../../utils/lorem";
 import { useAuth } from "../../../../context/hooks";
-import { Heading, InputEmail, InputPassword, 
+import { FileUploadButton, Heading, InputEmail, InputPassword, 
   InputText, InputPasswordValidation, 
   TextWarning, DropdownSelection,
   ButtonLoading,
@@ -54,7 +54,6 @@ const Create = () => {
     const { isLoading } = useAuth();
 
     const { uri,
-        modalPicVisible, setModalPicVisible,
         isPasswordClicked, setIsPasswordClicked, 
         showTerms, setShowTerms,
         isAccepted, setIsAccepted,
@@ -145,15 +144,15 @@ const Create = () => {
                         }}
                     />
 
-                        <InputPassword 
-                            control={control} 
-                            name="passwordConfirm" 
-                            placeholder="Confirm Password"
-                            rules={{ required: true }}
-                            inputProps={{
-                                onFocus: () => setIsPasswordClicked(false),
-                            }}
-                        />
+                    <InputPassword 
+                        control={control} 
+                        name="passwordConfirm" 
+                        placeholder="Confirm Password"
+                        rules={{ required: true }}
+                        inputProps={{
+                            onFocus: () => setIsPasswordClicked(false),
+                        }}
+                    />
 
                         {/*
                         <InputCheckbox
@@ -186,29 +185,33 @@ const Create = () => {
                             )}
                         </View>
                         */}
-                </Box>
-
-                <ButtonLoading
-                    disabled={!isValid}
-                    isLoading={isLoading}
-                    mt={5}
-                    backgroundColor={colors.greenStrong}
-                    w={250}
-                    onClick={handleSubmit(async () =>
-                        handleSignUp(control as unknown as Control<FormData>)
+                        {!uri ? (
+                            <FileUploadButton title="Add Profile Picture" fileExtension=".jpeg" onChange={handleProfilePicture}/>
+                        ) : (
+                            <img src={uri} alt="Profile" style={styles.profilePic}/>
                         )}
-                    >Sign up
-                </ButtonLoading>
 
-                <ButtonNavigation
-                    to="/login"
-                    mt={8}
-                    h={40}
-                    w={200}
-                    backgroundColor={colors.buttonBlue}
-                    >Already have an account?
-                </ButtonNavigation>
 
+                        <Box sx={styles.buttonsContainer}>
+                            <ButtonLoading
+                                mt={1}
+                                disabled={!isValid}
+                                isLoading={isLoading}
+                                backgroundColor={colors.greenStrong}
+                                onClick={handleSubmit(async () =>
+                                    handleSignUp(control as unknown as Control<FormData>)
+                                    )}
+                                >Sign up
+                            </ButtonLoading>
+
+                            <ButtonNavigation
+                                to="/login"
+                                backgroundColor={colors.buttonBlue}
+                                mt={1}
+                                >Already have an account?
+                            </ButtonNavigation>
+                        </Box>
+                </Box>
             </Box>
 
             {/*
@@ -261,6 +264,17 @@ const styles = {
                 padding: 1
             }
         },
+        buttonsContainer: {
+            width: '50%',
+            margin: 'auto',
+            paddingBottom: 6
+        },
+        profilePic: {
+            width: 200, 
+            height: 200, 
+            borderRadius: 10, 
+            objectFit: 'cover' as 'cover',
+        }
 };
 
 export default Create;
