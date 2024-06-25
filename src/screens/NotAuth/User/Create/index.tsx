@@ -5,7 +5,7 @@ import { colors } from "../../../../utils/colors";
 import { loremIpsum } from "../../../../utils/lorem";
 import { useAuth } from "../../../../context/hooks";
 import { FileUploadButton, Heading, InputEmail, InputPassword, 
-  InputText, InputPasswordValidation, InputCPF,
+  InputText, InputPasswordValidation, InputCPF, InputDate,
   TextWarning, DropdownSelection,
   ButtonLoading,
   ButtonNavigation
@@ -108,9 +108,7 @@ const Create = () => {
                 <Box sx={styles.formContainer}>
                     <InputText control={control} name="name" placeholder="Full Name" rules={{ required: true }} />
 
-                    {/*
                     <InputDate control={control} name="birthday" placeholder="Birth date" rules={{ required: true }}/>
-                    */}
 
                     <InputCPF control={control} name="cpf" placeholder="CPF" rules={{ required: true }} />
 

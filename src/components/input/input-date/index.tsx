@@ -1,45 +1,47 @@
 import React from "react";
 import { FieldValues, Path, RegisterOptions } from "react-hook-form";
-import InfoIcon from '@mui/icons-material/Info';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import { isDateValid } from "../../../libs/validators/validations";
 import InputText from "../input-text";
-import { isCPF } from "../../../libs/validators/validations";
 
-const DEFAULT_ERROR_MESSAGE = "Invalid CPF";
+const DEFAULT_ERROR_MESSAGE = "Data Inválida";
 
 const validate = (value: string) => {
   if (!value) return true;
 
-  return isCPF(value) || DEFAULT_ERROR_MESSAGE;
+  const reference = "before";
+  console.log('value: ', value)
+
+  return isDateValid(value, reference) || DEFAULT_ERROR_MESSAGE;
 };
 
-type InputCPFProps<T extends FieldValues> = {
-  control: any; 
+type InputDateProps<T extends FieldValues> = {
+  control: any;
   name: Path<T>;
   placeholder?: string;
-  rules?: RegisterOptions<T>; 
+  rules?: RegisterOptions<T>;
   editable?: boolean;
 };
 
-const InputCPF = <T extends FieldValues>({
+const InputDate = <T extends FieldValues>({
   control,
   name,
-  placeholder = "___.___.___-__",
+  placeholder = "__/__/____",
   rules,
   editable = true,
-}: InputCPFProps<T>) => {
+}: InputDateProps<T>) => {
   const handleMaskedChange = (value: string) => {
     const cleanedValue = value.replace(/\D/g, "");
 
     const formattedValue = cleanedValue
-      .slice(0, 11) // Limita a 11 caracteres
-      .replace(/(\d{3})(\d)/, "$1.$2") // Coloca ponto após o terceiro dígito
-      .replace(/(\d{3})(\d)/, "$1.$2") // Coloca ponto após o sexto dígito
-      .replace(/(\d{3})(\d{1,2})$/, "$1-$2"); // Coloca hífen após o nono dígito
+      .slice(0, 8) // Limita a 8 caracteres (99/99/9999)
+      .replace(/(\d{2})(\d)/, "$1/$2") // Coloca barra após o segundo dígito
+      .replace(/(\d{2})(\d)/, "$1/$2"); // Coloca barra após o quinto dígito
 
     return formattedValue;
   };
 
-  let icon: React.ReactNode = <InfoIcon />;
+  let icon: React.ReactNode = <CalendarMonthIcon/>;
 
   return (
     <InputText
@@ -47,7 +49,7 @@ const InputCPF = <T extends FieldValues>({
       name={name}
       icon={icon}
       placeholder={placeholder}
-      rules={{ validate, ...rules }} 
+      rules={{ validate, ...rules }}
       editable={editable}
       formatInternalValue={(str: string) => str.replace(/\D/g, "")} // Remove caracteres não numéricos ao enviar para o campo interno
       formatVisibleValue={handleMaskedChange} // Aplica a máscara ao valor visível
@@ -55,4 +57,4 @@ const InputCPF = <T extends FieldValues>({
   );
 };
 
-export default InputCPF;
+export default InputDate;

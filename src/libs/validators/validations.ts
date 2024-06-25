@@ -21,11 +21,13 @@ export const isDateValid =  (
   dateValue: string,
   reference: "after" | "before"
 ) => {
-  if (dateValue.length !== 10) return false;
+  if (dateValue.length !== 8) return false;
 
   const now = new Date();
 
-  const [day, month, year] = dateValue.split('/').map(Number);
+  const day = parseInt(dateValue.slice(0, 2), 10);
+  const month = parseInt(dateValue.slice(2, 4), 10);
+  const year = parseInt(dateValue.slice(4, 8), 10);
   const date = new Date(year, month - 1, day);
 
   const validDate = isValid(date);
