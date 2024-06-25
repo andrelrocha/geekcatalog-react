@@ -5,7 +5,7 @@ import { colors } from "../../../../utils/colors";
 import { loremIpsum } from "../../../../utils/lorem";
 import { useAuth } from "../../../../context/hooks";
 import { FileUploadButton, Heading, InputEmail, InputPassword, 
-  InputText, InputPasswordValidation, 
+  InputText, InputPasswordValidation, InputCPF,
   TextWarning, DropdownSelection,
   ButtonLoading,
   ButtonNavigation
@@ -110,9 +110,9 @@ const Create = () => {
 
                     {/*
                     <InputDate control={control} name="birthday" placeholder="Birth date" rules={{ required: true }}/>
+                    */}
 
                     <InputCPF control={control} name="cpf" placeholder="CPF" rules={{ required: true }} />
-                    */}
 
                     <DropdownSelection
                         control={control}
@@ -132,7 +132,7 @@ const Create = () => {
 
                     {isPasswordClicked && (
                             <TextWarning style={styles.passwordWarning}>Password must have at least 8 characters, one uppercase letter, one lowercase letter, and one number.</TextWarning>
-                        )}
+                    )}
                     <InputPasswordValidation 
                         control={control} 
                         name="password" 
@@ -173,17 +173,6 @@ const Create = () => {
                         value={isAccepted ? "accepted" : ""}
                         isChecked={isAccepted === '' ? false : true}
                         />
-
-                        <View style={styles.containerAddImage}>
-                            {!uri ? (
-                            <>
-                                <ButtonAddImage children={undefined} onPress={() => setModalPicVisible(!modalPicVisible)} />
-                                <TextWarning ml={10} w={200} fs={12} h={42} o={0.7}>Click on the camera icon to add a profile picture</TextWarning>
-                            </>
-                            ) : (
-                            <ImageTouchable onPress={() => setModalPicVisible(!modalPicVisible)} source={{uri}} alt='Profile Picture' bw={5}/>
-                            )}
-                        </View>
                         */}
                         {!uri ? (
                             <FileUploadButton title="Add Profile Picture" fileExtension=".jpeg" onChange={handleProfilePicture}/>
