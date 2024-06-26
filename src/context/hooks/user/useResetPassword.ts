@@ -9,18 +9,16 @@ interface ResetPassword {
 
 export default function useResetPassword() {
     const [isLoading, setIsLoading] = useState(false);
-    const [isSuccess, setIsSuccess] = useState(false);
-
 
     const handleResetPassword = async (credentials: ResetPassword, navigate: () => void) => {
         setIsLoading(true);
         try {
             await resetPassword(credentials);
-            setIsSuccess(true);
             alert('Success: Password reset successfully');
             navigate();
         } catch (error: any) {
-            alert('Error resetting password: ' + error?.response.data || 'An error occurred while resetting the password.');
+            const errorMessage = error.response?.data || error.message || "Failed to reset password";
+            alert('Error resetting password: ' + errorMessage);
         } finally {
             setIsLoading(false);
         }
@@ -28,7 +26,6 @@ export default function useResetPassword() {
 
     return {
         isLoading,
-        isSuccess,
         handleResetPassword,
     };
 }

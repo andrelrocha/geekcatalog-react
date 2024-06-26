@@ -15,12 +15,12 @@ export const resetPassword = async (resetPasswordData: HandleResetPasswordProps)
                 return response.data;
             })
             .catch((error) => {
-                throw new Error("Error resetting password: " + error.response.data);
+                throw error;
             });
 
         return response;
     } catch (error) {
-        console.error(error);
-        throw new Error("Error resetting password: " + error);
+        console.error("Error during reset password process: ", error);
+        throw error;
     }
 }

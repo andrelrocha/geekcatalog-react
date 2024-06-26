@@ -14,14 +14,12 @@ export async function loginUser(userData: UserLogin) {
         return response.data.token;
       })
       .catch((error) => {
-        console.log(error)
-        console.error('Error logging in:', error.response.data);
         throw error;
       });
     
     return response;
   } catch (error) {
-    console.error(error);
+    console.error("Error during sign in process: ", error);
     throw error;
   }
 }

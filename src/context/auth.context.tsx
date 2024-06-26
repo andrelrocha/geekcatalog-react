@@ -11,7 +11,7 @@ type AuthContextData = {
     authState: {
         token: string | null;
         authenticated: boolean;
-    };
+    };   
     currentUser?: UserReturn;
     isLoading: boolean;
     login: (credentials: UserLogin, navigate: () => void) => any;
@@ -98,7 +98,8 @@ export const AuthProvider = (props: AuthProviderProps) => {
 
             navigate();
         } catch (error: any) {
-            alert('Error: ' + error.response.data || 'An error occurred while logging in.');
+            const errorMessage = error.response?.data || error.message || "Failed to sign in user";
+            alert('An error occurred while logging in: ' + errorMessage);
             await removeToken();
         } finally {
             setIsLoading(false);

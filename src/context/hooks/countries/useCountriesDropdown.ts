@@ -15,9 +15,9 @@ export default function useCountriesDropdown() {
             label: country.name,
         }));
         setDropdownData(dropdownData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        alert("Error fetching countries");
+      } catch (error: any) {
+        const errorMessage = error.response?.data || error.message || "Failed to load countries data";
+        alert("Error fetching countries: " + errorMessage);
       }
     };
     fetchData();
