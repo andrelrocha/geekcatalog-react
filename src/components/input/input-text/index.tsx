@@ -76,25 +76,25 @@ const InputText = <T extends FieldValues>({
   const handleInputIcon = (isValid: boolean, isInvalid: boolean) => {
     if ((icon && !isValid && !isInvalid) || staticIcon) {
       return (
-        <IconButton>
+        <IconButton tabIndex={-1}>
           {icon}
         </IconButton>
       );
     } else if (isValid && _visibleValidation) {
       return (
-        <IconButton>
+        <IconButton tabIndex={-1}>
           <Check color="success" />
         </IconButton>
       );
     } else if (isInvalid && _visibleValidation) {
       return (
-        <IconButton>
+        <IconButton tabIndex={-1}>
           <Close color="error" />
         </IconButton>
       );
     }
     return (
-      <IconButton>
+      <IconButton tabIndex={-1}>
         <Info color="action" />
       </IconButton>
     );
