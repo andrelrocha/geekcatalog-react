@@ -62,11 +62,14 @@ const DropdownSelection: React.FC<DropdownProps> = ({
                   borderWidth: 1,
                   boxShadow: isFocused ? '0 0 0 1px #2684FF' : 'none',
                   borderColor: isFocused ? colors.buttonBlue : colors.gray,
+                  '&:hover': {
+                    borderColor: colors.black,
+                  },
                 }),
                 placeholder: (base) => ({
                   ...base,
                   fontSize: 16,
-                  color: '#999',
+                  color: colors.gray
                 }),
                 singleValue: (base) => ({
                   ...base,

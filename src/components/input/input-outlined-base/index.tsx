@@ -21,9 +21,6 @@ const StyledInput = styled((props: OutlinedInputProps) => (
     color: colors.black,
     fontFamily: 'Poppins',
     '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderColor: colors.darkPurple  
-      },
       '&.Mui-focused fieldset': {
         borderColor: colors.buttonBlue,
       },
@@ -31,6 +28,12 @@ const StyledInput = styled((props: OutlinedInputProps) => (
         textAlign: 'center',
         paddingTop: (props: InputProps) => (props.inputProps?.multiple ? 10 : 0),
       },
+    },
+    '& .MuiOutlinedInput-notchedOutline': {
+      borderColor: colors.gray,
+    },
+    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+      borderColor: colors.buttonBlue,
     },
 }));
 

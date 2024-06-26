@@ -10,7 +10,6 @@ const validate = (value: string) => {
   if (!value) return true;
 
   const reference = "before";
-  console.log('value: ', value)
 
   return isDateValid(value, reference) || DEFAULT_ERROR_MESSAGE;
 };
