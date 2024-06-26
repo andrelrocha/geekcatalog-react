@@ -17,21 +17,21 @@ interface InputProps extends OutlinedInputProps {
 const StyledInput = styled((props: OutlinedInputProps) => (
   <MUIOutlinedInput {...props} />
 ))(({ theme }) => ({
-  width: '100%',
-  color: colors.black,
-  fontFamily: 'Poppins',
-  '& .MuiOutlinedInput-root': {
-    '& fieldset': {
-      borderColor: colors.gray,
+    width: '100%',
+    color: colors.black,
+    fontFamily: 'Poppins',
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: colors.darkPurple  
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: colors.buttonBlue,
+      },
+      '& .MuiInputBase-input': {
+        textAlign: 'center',
+        paddingTop: (props: InputProps) => (props.inputProps?.multiple ? 10 : 0),
+      },
     },
-    '&.Mui-focused fieldset': {
-      borderColor: colors.buttonBlue,
-    },
-    '& .MuiInputBase-input': {
-      textAlign: 'center',
-      paddingTop: (props: InputProps) => (props.inputProps?.multiple ? 10 : 0),
-    },
-  },
 }));
 
 const OutlinedInput: React.FC<InputProps> = ({
