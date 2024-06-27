@@ -30,14 +30,18 @@ const InputPhone = <T extends FieldValues>({
   label,
 }: InputPhoneProps<T>) => {
   const handleMaskedChange = (value: string) => {
-    const cleanedValue = value.replace(/\D/g, "");
+    const cleanedValue = value.replace(/\D/g, "").slice(0, 11); // Limita a 11 caracteres
 
     const formattedValue = cleanedValue
-      .slice(0, 11) // Limita a 11 caracteres
       .replace(/(\d{2})(\d)/, "($1) $2") // Coloca parênteses após os dois primeiros dígitos e um espaço
       .replace(/(\d{5})(\d{1,4})$/, "$1-$2"); // Coloca hífen após o quinto dígito
 
     return formattedValue;
+  };
+
+  const handleInternalValueChange = (str: string) => {
+    const cleanedValue = str.replace(/\D/g, "");
+    return cleanedValue.slice(0, 11); // Limita a 11 caracteres
   };
 
   let icon: React.ReactNode = <PhoneIcon />;
@@ -51,8 +55,8 @@ const InputPhone = <T extends FieldValues>({
       placeholder={placeholder}
       rules={{ validate, ...rules }} 
       editable={editable}
-      formatInternalValue={(str: string) => str.replace(/\D/g, "")} // Remove caracteres não numéricos ao enviar para o campo interno
-      formatVisibleValue={handleMaskedChange} // Aplica a máscara ao valor visível
+      formatInternalValue={handleInternalValueChange} 
+      formatVisibleValue={handleMaskedChange}
     />
   );
 };

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Control, useForm } from "react-hook-form";
 import { Box, Typography } from "@mui/material";
 import { colors } from "../../../../utils/colors";
@@ -49,8 +49,7 @@ const Create = () => {
     } = useForm({
         defaultValues: DEFAULT_FORM_VALUES,
         mode: "onChange"})
-    //const { isLoading, signUp } = useAuth()
-    const { isLoading } = useAuth();
+    const { isLoading, signUp } = useAuth()
 
     const { uri,
         isPasswordClicked, setIsPasswordClicked, 
@@ -86,9 +85,8 @@ const Create = () => {
             uri: uri,
         };
 
-        //await signUp(userData, () => navigation('/homeauth'));    
+        await signUp(userData, () => navigation('/homeauth'));    
         reset();
-        resetField('country');
     }
     
     return (

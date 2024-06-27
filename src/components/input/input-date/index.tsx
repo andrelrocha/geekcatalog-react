@@ -53,8 +53,8 @@ const InputDate = <T extends FieldValues>({
       placeholder={placeholder}
       rules={{ validate, ...rules }}
       editable={editable}
-      formatInternalValue={(str: string) => str.replace(/\D/g, "")} // Remove caracteres não numéricos ao enviar para o campo interno
-      formatVisibleValue={handleMaskedChange} // Aplica a máscara ao valor visível
+      formatInternalValue={(str: string) => handleMaskedChange(str)}
+      formatVisibleValue={handleMaskedChange}
     />
   );
 };

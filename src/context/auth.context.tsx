@@ -1,6 +1,7 @@
 import React, { createContext, ReactNode, useEffect, useState } from "react";
 import { loginUser } from '../services/user/login';
-
+import { createUser } from "../services/user/create";
+import { saveProfilePic } from "../services/user/saveProfilePic";
 import { UserLogin } from '../types/user/userLoginDTO';
 import { UserReturn } from "../types/user/userReturnDTO";
 import { UserCreate } from "../types/user/userCreateDTO";
@@ -15,7 +16,7 @@ type AuthContextData = {
     currentUser?: UserReturn;
     isLoading: boolean;
     login: (credentials: UserLogin, navigate: () => void) => any;
-    //signUp: (credentials: UserCreate, navigate: () => void) => any;
+    signUp: (data: UserCreate, navigate: () => void) => any;
     logout: () => any;
     //update: (user: UserUpdate) => any;
     //deleteUserAccount: () => any;
@@ -33,7 +34,7 @@ const AuthContext = createContext<AuthContextData>({
     currentUser: undefined,
     isLoading: false,
     login: async () => {},
-    //signUp: async () => {},
+    signUp: async () => {},
     logout: async () => {},
     //update: async () => {},
     //deleteUserAccount: async () => {},
@@ -106,21 +107,20 @@ export const AuthProvider = (props: AuthProviderProps) => {
         }
     };
 
-    /*
-    const signUp = async (credentials: UserCreate, navigate: () => void) => {
+    const signUp = async (data: UserCreate, navigate: () => void) => {
         setIsLoading(true);
-        credentials.phone = credentials.phone.replace(/(\d{2})(\d{5})(\d{4})/, '($1)$2-$3');
+        data.phone = data.phone.replace(/(\d{2})(\d{5})(\d{4})/, '($1)$2-$3');
 
         try {
-            const newUser = await createUser(credentials);
+            const newUser = await createUser(data);
 
             if (!newUser) {
                 console.error("Error creating user");
                 return;
             }
             const tokenJWT = await loginUser({
-                login: credentials.login,
-                password: credentials.password
+                login: data.login,
+                password: data.password
             });
             if (!tokenJWT) {
                 console.error("Empty or undefined JWT token");
@@ -134,23 +134,26 @@ export const AuthProvider = (props: AuthProviderProps) => {
 
             await setToken(tokenJWT);
 
-            if (credentials.uri) {
-                await saveProfilePic({ uri: credentials.uri, userId: newUser?.id as string });
+            if (data.uri) {
+                await saveProfilePic({ uri: data.uri, userId: newUser?.id as string });
             }
 
-            await loadStorageData();
+            //await loadStorageData();
 
             alert('Success: User created successfully!');
             
             navigate();
         } catch (error: any) {
-            console.error("Error creating a new user:", error);
-            alert('Error: An error occurred while creating your account.');
+            const errorMessage = error.response?.data || error.message || "Failed to sign up user";
+            alert('An error occurred while creating your account: ' + errorMessage);
             await removeToken();
+            window.location.reload();
         } finally {
             setIsLoading(false);
         }
     };
+
+    /*
 
     const update = async (user: UserUpdate) => {
         setIsLoading(true);
@@ -208,8 +211,8 @@ export const AuthProvider = (props: AuthProviderProps) => {
         isLoading,
         login,
         logout,
-        /*
         signUp,
+        /*
         update,
         deleteUserAccount, */
     };
