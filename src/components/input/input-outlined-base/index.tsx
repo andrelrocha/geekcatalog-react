@@ -27,6 +27,10 @@ const StyledInput = styled((props: OutlinedInputProps) => (
       '& .MuiInputBase-input': {
         textAlign: 'center',
         paddingTop: (props: InputProps) => (props.inputProps?.multiple ? 10 : 0),
+        '&::placeholder': {
+          color: colors.gray,
+          fontSize: 16
+        },
       },
     },
     '& .MuiOutlinedInput-notchedOutline': {

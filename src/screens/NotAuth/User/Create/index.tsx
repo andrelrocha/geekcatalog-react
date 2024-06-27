@@ -108,7 +108,7 @@ const Create = () => {
                 <Box sx={styles.formContainer}>
                     <InputText control={control} name="name" placeholder="Full Name" rules={{ required: true }} />
 
-                    <InputDate control={control} name="birthday" placeholder="Birth date" rules={{ required: true }}/>
+                    <InputDate control={control} name="birthday" rules={{ required: true }}/>
 
                     <InputCPF control={control} name="cpf" placeholder="CPF" rules={{ required: true }} />
 
@@ -225,7 +225,7 @@ const Create = () => {
 
 const styles = {
         formContainer: {
-            width: '60%',
+            width: '50%',
             justifyContent: 'center',
             alignItems: 'center',
             margin: 'auto',
@@ -252,7 +252,7 @@ const styles = {
             }
         },
         buttonsContainer: {
-            width: '50%',
+            width: '40%',
             margin: 'auto',
             paddingBottom: 6
         },

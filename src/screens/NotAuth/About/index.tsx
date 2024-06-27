@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Avatar, Box, Typography } from "@mui/material";
-import { Heading } from "../../../components";
+import AndroidIcon from '@mui/icons-material/Android';
+import { ButtonLoading, Heading } from "../../../components";
+import { downloadApk } from "../../../services/infra/downloadApk";
+import { colors } from "../../../utils/colors";
 
 const myPhoto = require('../../../assets/images/profile.jpg');
 
@@ -25,6 +28,18 @@ const styles = {
         lineHeight: 1.5,
         fontSize: 16
     },
+    button: {
+        width: '20%',
+        height: '10%',
+        marginBottom: 2,
+    },
+    buttonInnerContent: {
+        textAlign: 'center',
+        display: 'flex',
+        justifyContent: 'center',
+        gap: 2,
+        color: colors.black
+    },
     responsiveTextContainer: {
         '@media (max-width: 510px)': {
             width: '90%', 
@@ -38,6 +53,28 @@ const styles = {
 }
 
 export default function About() {
+    const [isLoading, setIsLoading] = useState(false);
+    
+    const handleDownload = async () => {
+        setIsLoading(true);
+        try {
+            const data = await downloadApk();
+            const url = window.URL.createObjectURL(new Blob([data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'geekcatalog-v.1.0.2.apk');
+            document.body.appendChild(link);
+            link.click();
+            if (link.parentNode) {
+                link.parentNode.removeChild(link);
+            }
+        } catch (error) {
+            console.error("Failed to download APK:", error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     return (
         <Box sx={styles.container}>
             <Heading fs={32} mb={2}>About me and the project</Heading>
@@ -56,6 +93,20 @@ export default function About() {
 
             <Typography sx={styles.text} variant="subtitle1" fontWeight={700} fontSize={16}>Developed by: André Rocha</Typography>
             <Typography sx={styles.text} fontWeight={600}>Fullstack developer</Typography>
+
+            <Box sx={styles.button}>
+                <ButtonLoading
+                    mt={1}
+                    isLoading={isLoading}
+                    backgroundColor={colors.sage}
+                    onClick={handleDownload}
+                    
+                    >
+                        <Box sx={styles.buttonInnerContent}>
+                            Download Mobile App <AndroidIcon />
+                        </Box>
+                </ButtonLoading>
+            </Box>
         </Box>
     );
 }

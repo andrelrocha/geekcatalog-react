@@ -69,7 +69,7 @@ const DropdownSelection: React.FC<DropdownProps> = ({
                 placeholder: (base) => ({
                   ...base,
                   fontSize: 16,
-                  color: colors.gray
+                  color: colors.gray,
                 }),
                 singleValue: (base) => ({
                   ...base,
