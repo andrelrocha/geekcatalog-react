@@ -203,6 +203,7 @@ export const AuthProvider = (props: AuthProviderProps) => {
         setCurrentUser(undefined);
 
         await removeToken();
+        window.location.href = "/";
     };
   
     const value = {
