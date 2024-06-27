@@ -5,7 +5,7 @@ export default function useUserCreation() {
   const [uri, setUri] = useState("");
   const [isPasswordClicked, setIsPasswordClicked] = useState(false);
   const [showTerms, setShowTerms] = useState(false)
-  const [isAccepted, setIsAccepted] = useState('')
+  const [isAccepted, setIsAccepted] = useState(false)
 
   const handleProfilePicture = async (file: File) => {
     const reader = new FileReader();

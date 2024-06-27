@@ -1,14 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Control, useForm } from "react-hook-form";
 import { Box, Typography } from "@mui/material";
 import { colors } from "../../../../utils/colors";
 import { loremIpsum } from "../../../../utils/lorem";
 import { useAuth } from "../../../../context/hooks";
 import { FileUploadButton, Heading, InputEmail, InputPassword, 
-  InputText, InputPasswordValidation, InputCPF, InputDate,
-  TextWarning, DropdownSelection, InputPhone,
-  ButtonLoading,
-  ButtonNavigation
+  InputText, InputPasswordValidation, InputCPF, InputDate, InputCheckbox,
+  TextWarning, DropdownSelection, InputPhone, Modal,
+  ButtonLoading, ButtonNavigation
 } from "../../../../components";
 import useUserCreation from "../../../../context/hooks/user/useUserCreation";
 import useCountriesDropdown from "../../../../context/hooks/countries/useCountriesDropdown";
@@ -24,7 +23,7 @@ const DEFAULT_FORM_VALUES = {
   email: "",
   password: "",
   passwordConfirm: "",
-  term: "",
+  term: false,
   country: "",
 };
 
@@ -63,7 +62,7 @@ const Create = () => {
     const { dropdownData } = useCountriesDropdown();
     
     const handleSignUp = async (control: Control<FormData>) => {
-        //if (isAccepted === '') return alert('You must accept the Terms and Conditions of Use');
+        if (isAccepted === false) return alert('You must accept the Terms and Conditions of Use');
         
         const isEqualPassword = isSamePassword(control._formValues.password, control._formValues.passwordConfirm);
         if (!isEqualPassword) return alert('The passwords do not match');
@@ -87,13 +86,11 @@ const Create = () => {
             uri: uri,
         };
 
-        console.log(userData);
-
         //await signUp(userData, () => navigation('/homeauth'));    
         reset();
         resetField('country');
     }
-
+    
     return (
             <>
             <Box>
@@ -152,64 +149,60 @@ const Create = () => {
                         }}
                     />
 
-                        {/*
-                        <InputCheckbox
+                    <InputCheckbox
                         aria-label="I accept the Terms and Conditions of Use"
-                        control={control}
                         label={
-                            <>
-                            <Text>I accept the </Text>
-                            <Text
-                                onPress={() => setShowTerms(true)}
-                                style={{ color: colors.buttonBlue}}
-                            >Terms and Conditions of Use
-                            </Text>
-                            </>
-                        }
-                        name="term"
-                        onPress={() => setIsAccepted(!isAccepted ? 'accepted' : '')}
-                        value={isAccepted ? "accepted" : ""}
-                        isChecked={isAccepted === '' ? false : true}
-                        />
-                        */}
-                        {!uri ? (
-                            <FileUploadButton title="Add Profile Picture" fileExtension=".jpeg" onChange={handleProfilePicture}/>
-                        ) : (
-                            <img src={uri} alt="Profile" style={styles.profilePic}/>
-                        )}
+                            <Box sx={styles.inputCheckbox}>
+                                <Typography>I accept the </Typography>
+                                <Typography
+                                    component="span"
+                                    style={{ color: colors.buttonBlue, cursor: "pointer" }}
+                                    onClick={() => setShowTerms(true)}
+                                >
+                                    Terms and Conditions of Use
+                                </Typography>
+                            </Box>
+                        } 
+                        name='term'
+                        control={control}
+                        onChange={(value) => setIsAccepted(value)}
+                    />
+                
+                    {!uri ? (
+                        <FileUploadButton title="Add Profile Picture" fileExtension=".jpeg" onChange={handleProfilePicture}/>
+                    ) : (
+                        <img src={uri} alt="Profile" style={styles.profilePic}/>
+                    )}
 
 
-                        <Box sx={styles.buttonsContainer}>
-                            <ButtonLoading
-                                mt={1}
-                                disabled={!isValid}
-                                isLoading={isLoading}
-                                backgroundColor={colors.greenStrong}
-                                onClick={handleSubmit(async () =>
-                                    handleSignUp(control as unknown as Control<FormData>)
-                                    )}
-                                >Sign up
-                            </ButtonLoading>
+                    <Box sx={styles.buttonsContainer}>
+                        <ButtonLoading
+                            mt={1}
+                            disabled={!isValid}
+                            isLoading={isLoading}
+                            backgroundColor={colors.greenStrong}
+                            onClick={handleSubmit(async () =>
+                                handleSignUp(control as unknown as Control<FormData>)
+                                )}
+                            >Sign up
+                        </ButtonLoading>
 
-                            <ButtonNavigation
-                                to="/login"
-                                backgroundColor={colors.buttonBlue}
-                                mt={1}
-                                >Already have an account?
-                            </ButtonNavigation>
-                        </Box>
+                        <ButtonNavigation
+                            to="/login"
+                            backgroundColor={colors.buttonBlue}
+                            mt={1}
+                            >Already have an account?
+                        </ButtonNavigation>
+                    </Box>
                 </Box>
             </Box>
 
-            {/*
-
             <Modal
-                body={loremIpsum}
-                isOpen={showTerms}
+                open={showTerms}
                 onClose={() => setShowTerms(false)}
                 title="Terms and Conditions of Use"
+                content={loremIpsum}
             />
-            */}
             </> 
         );
         }
@@ -252,6 +245,14 @@ const styles = {
             height: 200, 
             borderRadius: 10, 
             objectFit: 'cover' as 'cover',
+        },
+        inputCheckbox: {
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100%',
+            gap: 0.5
         }
 };
 

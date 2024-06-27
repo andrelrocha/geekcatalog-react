@@ -5,6 +5,7 @@ import FileUploadButton from "./button/file-uploading";
 import Footer from "./footer";
 import Header from "./header";
 import Heading from "./heading";
+import InputCheckbox from "./input/input-checkbox";
 import InputCPF from "./input/input-cpf";
 import InputDate from "./input/input-date";
 import InputEmail from "./input/input-email";
@@ -15,5 +16,5 @@ import InputPasswordValidation from "./input/input-password-validation";
 import Modal from "./modal";
 import TextWarning from "./text-warning";
 
-export { ButtonLoading, ButtonNavigation, DropdownSelection, FileUploadButton, Footer, Header, Heading, InputCPF, InputDate, InputEmail, InputText, 
+export { ButtonLoading, ButtonNavigation, DropdownSelection, FileUploadButton, Footer, Header, Heading, InputCheckbox, InputCPF, InputDate, InputEmail, InputText, 
     InputPassword, InputPasswordValidation, InputPhone, Modal, TextWarning }
