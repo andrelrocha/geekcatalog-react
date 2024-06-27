@@ -18,6 +18,7 @@ type InputCPFProps<T extends FieldValues> = {
   placeholder?: string;
   rules?: RegisterOptions<T>; 
   editable?: boolean;
+  label?: string;
 };
 
 const InputCPF = <T extends FieldValues>({
@@ -26,6 +27,7 @@ const InputCPF = <T extends FieldValues>({
   placeholder = "___.___.___-__",
   rules,
   editable = true,
+  label
 }: InputCPFProps<T>) => {
   const handleMaskedChange = (value: string) => {
     const cleanedValue = value.replace(/\D/g, "");
@@ -43,6 +45,7 @@ const InputCPF = <T extends FieldValues>({
 
   return (
     <InputText
+      label={label}
       control={control}
       name={name}
       icon={icon}

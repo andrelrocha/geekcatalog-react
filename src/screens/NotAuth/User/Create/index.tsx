@@ -106,11 +106,11 @@ const Create = () => {
                 </Typography>
 
                 <Box sx={styles.formContainer}>
-                    <InputText control={control} name="name" placeholder="Full Name" rules={{ required: true }} />
+                    <InputText control={control} name="name" placeholder="Full Name" label="Name" rules={{ required: true }} />
 
-                    <InputDate control={control} name="birthday" placeholder="Birth Date" rules={{ required: true }}/>
+                    <InputDate control={control} name="birthday" placeholder="Birth Date" label="Birthday" rules={{ required: true }}/>
 
-                    <InputCPF control={control} name="cpf" placeholder="CPF" rules={{ required: true }} />
+                    <InputCPF control={control} name="cpf" placeholder="CPF" label="CPF" rules={{ required: true }} />
 
                     <DropdownSelection
                         control={control}
@@ -119,16 +119,18 @@ const Create = () => {
                         label="name"
                         value="id"
                         options={dropdownData}
+                        labelDisplay="Country"
                     />
 
-                    <InputPhone control={control} name="phone" placeholder="Mobile Phone" rules={{ required: true }}/>
+                    <InputPhone control={control} name="phone" placeholder="Mobile Phone" label="Phone" rules={{ required: true }}/>
 
-                    <InputEmail control={control} name="email" placeholder="E-mail" rules={{ required: true }}/>
+                    <InputEmail control={control} name="email" placeholder="E-mail" label="E-mail" rules={{ required: true }}/>
 
                     {isPasswordClicked && (
                             <TextWarning style={styles.passwordWarning}>Password must have at least 8 characters, one uppercase letter, one lowercase letter, and one number.</TextWarning>
                     )}
                     <InputPasswordValidation 
+                        label="Password"
                         control={control} 
                         name="password" 
                         placeholder="Password" 
@@ -140,6 +142,7 @@ const Create = () => {
                     />
 
                     <InputPassword 
+                        label="Confirm Password"
                         control={control} 
                         name="passwordConfirm" 
                         placeholder="Confirm Password"
@@ -222,7 +225,7 @@ const styles = {
             fontSize: 18,
             textAlign: 'center',
             margin: 'auto',
-            marginBottom: 2,
+            marginBottom: 4,
             color: colors.black,
             width: '80%'
         },

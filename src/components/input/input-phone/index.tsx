@@ -18,6 +18,7 @@ type InputPhoneProps<T extends FieldValues> = {
   placeholder?: string;
   rules?: RegisterOptions<T>; 
   editable?: boolean;
+  label?: string;
 };
 
 const InputPhone = <T extends FieldValues>({
@@ -26,6 +27,7 @@ const InputPhone = <T extends FieldValues>({
   placeholder = "(__) _____-____",
   rules,
   editable = true,
+  label,
 }: InputPhoneProps<T>) => {
   const handleMaskedChange = (value: string) => {
     const cleanedValue = value.replace(/\D/g, "");
@@ -42,6 +44,7 @@ const InputPhone = <T extends FieldValues>({
 
   return (
     <InputText
+      label={label}
       control={control}
       name={name}
       icon={icon}

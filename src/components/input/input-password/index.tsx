@@ -14,6 +14,8 @@ const validate = (value: string) => {
 
   return isValidPassword(value) || DEFAULT_ERROR_MESSAGE
 }
+
+
 const InputPassword = <T extends FieldValues>(props: ComponentProps<typeof InputText<T>>) => {
   const [showPassword, setShowPassword] = useState(false)
 

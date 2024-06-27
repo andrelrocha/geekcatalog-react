@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 import { Control, Controller } from 'react-hook-form';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { DropdownData } from '../../types/utils/dropDownDTO';
 import { colors } from '../../utils/colors';
-  
+
 interface DropdownProps {
     name: string;
     control: Control<any>;
@@ -15,7 +15,17 @@ interface DropdownProps {
     mt?: number;
     h?: number;
     br?: number;
+    label?: string;
+    labelDisplay?: string;
     [key: string]: any; 
+}
+
+const styles = {
+    labelText: {
+        alignSelf: 'flex-start', 
+        marginBottom: '0.5rem',
+        fontFamily: 'Poppins',
+    },
 }
 
 const DropdownSelection: React.FC<DropdownProps> = ({
@@ -28,21 +38,28 @@ const DropdownSelection: React.FC<DropdownProps> = ({
   mt,
   h,
   br,
+  label,
+  labelDisplay,
   ...props
 }) => {
     const [dropdownOptions, setDropdownOptions] = useState<DropdownData[]>([]);
     const [isFocused, setIsFocused] = useState(false);
-  
+
     useEffect(() => {
       setDropdownOptions(options);
     }, [options]);
-  
+
     return (
-      <Controller
-        name={name}
-        control={control}
-        render={({ field: { onChange, value } }) => (
-          <Box sx={{ position: 'relative', marginBottom: mb || 0, marginTop: mt || 0 }}>
+      <Box sx={{ position: 'relative', marginBottom: mb || 0, marginTop: mt || 0 }}>
+        {label && (
+          <Typography sx={styles.labelText}>
+            {labelDisplay}
+          </Typography>
+        )}
+        <Controller
+          name={name}
+          control={control}
+          render={({ field: { onChange, value } }) => (
             <Select
               {...props}
               options={dropdownOptions}
@@ -78,10 +95,10 @@ const DropdownSelection: React.FC<DropdownProps> = ({
                 }),
               }}
             />
-          </Box>
-        )}
-      />
+          )}
+        />
+      </Box>
     );
-  };
-  
-  export default DropdownSelection;
+};
+
+export default DropdownSelection;

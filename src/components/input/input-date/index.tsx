@@ -20,6 +20,7 @@ type InputDateProps<T extends FieldValues> = {
   placeholder?: string;
   rules?: RegisterOptions<T>;
   editable?: boolean;
+  label?: string;
 };
 
 const InputDate = <T extends FieldValues>({
@@ -28,6 +29,7 @@ const InputDate = <T extends FieldValues>({
   placeholder = "__/__/____",
   rules,
   editable = true,
+  label,
 }: InputDateProps<T>) => {
   const handleMaskedChange = (value: string) => {
     const cleanedValue = value.replace(/\D/g, "");
@@ -44,6 +46,7 @@ const InputDate = <T extends FieldValues>({
 
   return (
     <InputText
+      label={label}
       control={control}
       name={name}
       icon={icon}
