@@ -45,7 +45,6 @@ const Create = () => {
         formState: { isValid },
         handleSubmit,
         reset,
-        resetField
     } = useForm({
         defaultValues: DEFAULT_FORM_VALUES,
         mode: "onChange"})

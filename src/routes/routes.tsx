@@ -16,14 +16,13 @@ export default function AppRouter() {
     const { authenticated } = authState;
 
     useEffect(() => {
-
     }, [authenticated]);    
 
     return (
         <Router>
             <Header />
             <Routes>
-                {["/", "/home"].map((path, index) => <Route path={path} element={<Home/>} key={index} />)}
+                <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Create />} />
                 <Route path="/about" element={<About />} />
@@ -31,7 +30,7 @@ export default function AppRouter() {
                 <Route path="/resetpassword" element={<ResetPassword />} />
                 
                 {authenticated ? (
-                    <Route path="/homeauth" element={<HomeAuth />} />
+                    <Route path="/home" element={<HomeAuth />} />
                 ) : null}
 
                 <Route path="*" element={<NotFoundPage />} />

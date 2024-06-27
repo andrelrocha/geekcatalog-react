@@ -2,6 +2,8 @@ import React, { createContext, ReactNode, useEffect, useState } from "react";
 import { loginUser } from '../services/user/login';
 import { createUser } from "../services/user/create";
 import { saveProfilePic } from "../services/user/saveProfilePic";
+import { verifyJWT } from "../services/user/verifyJWT";
+import { getUserByJWT } from "../services/user/getByJWT";
 import { UserLogin } from '../types/user/userLoginDTO';
 import { UserReturn } from "../types/user/userReturnDTO";
 import { UserCreate } from "../types/user/userCreateDTO";
@@ -52,10 +54,9 @@ export const AuthProvider = (props: AuthProviderProps) => {
     });
 
     useEffect(() => {
-      //loadStorageData();
+      loadStorageData();
     }, []);
 
-    /*
     const loadStorageData = async () => {
         const token = await getToken();
         if (token) {
@@ -78,7 +79,6 @@ export const AuthProvider = (props: AuthProviderProps) => {
             logout();
         }
     };
-    */
 
     const login = async (credentials: UserLogin, navigate: () => void) => {
         setIsLoading(true);
@@ -95,7 +95,7 @@ export const AuthProvider = (props: AuthProviderProps) => {
 
             await setToken(tokenJWT);
 
-            //await loadStorageData();
+            await loadStorageData();
 
             navigate();
         } catch (error: any) {
@@ -138,7 +138,7 @@ export const AuthProvider = (props: AuthProviderProps) => {
                 await saveProfilePic({ uri: data.uri, userId: newUser?.id as string });
             }
 
-            //await loadStorageData();
+            await loadStorageData();
 
             alert('Success: User created successfully!');
             

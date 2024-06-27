@@ -81,7 +81,7 @@ const Header = () => {
         </Box>
         <span style={styles.spacer}></span>
         <Box sx={styles.buttonsContainer} id="buttonsContainer">
-          <ButtonNavigation to='/home' variant="outlined" p={0.1} br={0.5} fs={12} h={2.2} textColor={colors.whiteSmoke}>Home</ButtonNavigation>
+          <ButtonNavigation to='/' variant="outlined" p={0.1} br={0.5} fs={12} h={2.2} textColor={colors.whiteSmoke}>Home</ButtonNavigation>
           <ButtonNavigation to='/about' variant='outlined' p={0.1} br={0.5} fs={12} h={2.2} textColor={colors.whiteSmoke}>About</ButtonNavigation>
           <ButtonNavigation to='/login' variant="outlined" p={0.1} br={0.5} fs={12} h={2.2} backgroundColor={colors.whiteSmoke} textColor={colors.black} >Sign In</ButtonNavigation>
           <ButtonNavigation to='/signup' p={0.1} br={0.5} fs={12} h={2.2} backgroundColor={colors.greenStrong} textColor={colors.whiteSmoke}>Sign Up</ButtonNavigation>
@@ -96,7 +96,7 @@ const Header = () => {
         icon={<CloseIcon />}
         content={
           <Box sx={styles.modalContent}>
-            <ButtonNavigation to='/home' variant="outlined" p={0.5} br={0.5} fs={18} h={3.5} textColor={colors.black} 
+            <ButtonNavigation to='/' variant="outlined" p={0.5} br={0.5} fs={18} h={3.5} textColor={colors.black} 
                 handleStates={() => setModalNavIsOpen(false)}>
                   Home
             </ButtonNavigation>
