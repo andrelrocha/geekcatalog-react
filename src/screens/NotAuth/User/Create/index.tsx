@@ -6,7 +6,7 @@ import { loremIpsum } from "../../../../utils/lorem";
 import { useAuth } from "../../../../context/hooks";
 import { FileUploadButton, Heading, InputEmail, InputPassword, 
   InputText, InputPasswordValidation, InputCPF, InputDate,
-  TextWarning, DropdownSelection,
+  TextWarning, DropdownSelection, InputPhone,
   ButtonLoading,
   ButtonNavigation
 } from "../../../../components";
@@ -108,7 +108,7 @@ const Create = () => {
                 <Box sx={styles.formContainer}>
                     <InputText control={control} name="name" placeholder="Full Name" rules={{ required: true }} />
 
-                    <InputDate control={control} name="birthday" rules={{ required: true }}/>
+                    <InputDate control={control} name="birthday" placeholder="Birth Date" rules={{ required: true }}/>
 
                     <InputCPF control={control} name="cpf" placeholder="CPF" rules={{ required: true }} />
 
@@ -121,10 +121,7 @@ const Create = () => {
                         options={dropdownData}
                     />
 
-
-                    {/*
                     <InputPhone control={control} name="phone" placeholder="Mobile Phone" rules={{ required: true }}/>
-                    */}
 
                     <InputEmail control={control} name="email" placeholder="E-mail" rules={{ required: true }}/>
 
@@ -202,15 +199,6 @@ const Create = () => {
             </Box>
 
             {/*
-            { modalPicVisible && (
-                <ImageSelectionModal 
-                visible={modalPicVisible} 
-                onRequestClose={() => setModalPicVisible(false)} 
-                onCameraPress={() => handleProfilePicture('camera')}
-                onGalleryPress={() => handleProfilePicture('gallery')}
-                />
-            )}
-
 
             <Modal
                 body={loremIpsum}
